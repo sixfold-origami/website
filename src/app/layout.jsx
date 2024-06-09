@@ -1,4 +1,5 @@
 import ThemeRegistry from '@/components/themeRegistry/ThemeRegistry';
+import AppBar from '@/components/AppBar';
 
 export const metadata = {
 	title: 'Create Next App',
@@ -9,7 +10,10 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
 			<body>
-				<ThemeRegistry>{children}</ThemeRegistry>
+				<ThemeRegistry>
+					<AppBar />
+					{children}
+				</ThemeRegistry>
 			</body>
 		</html>
 	);
