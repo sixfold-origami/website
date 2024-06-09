@@ -6,12 +6,12 @@ import NextAppDirEmotionCacheProvider from './EmotionCache';
 import theme from './theme';
 
 export default function ThemeRegistry({ children }) {
-  return (
-    <NextAppDirEmotionCacheProvider options={{ key: 'joy' }}>
-      <CssVarsProvider theme={theme}>
-        <CssBaseline />
-        {children}
-      </CssVarsProvider>
-    </NextAppDirEmotionCacheProvider>
-  );
+	return (
+		<NextAppDirEmotionCacheProvider options={{ key: 'joy' }}>
+			<CssVarsProvider theme={theme}>
+				<CssBaseline />
+				{children}
+			</CssVarsProvider>
+		</NextAppDirEmotionCacheProvider>
+	);
 }
