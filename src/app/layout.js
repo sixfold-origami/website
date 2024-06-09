@@ -1,4 +1,4 @@
-import ThemeRegistry from '@/components/ThemeRegistry/ThemeRegistry';
+import ThemeRegistry from '@/components/themeRegistry/ThemeRegistry';
 
 export const metadata = {
 	title: 'Create Next App',

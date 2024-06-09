@@ -6,6 +6,7 @@ import FormLabel from '@mui/joy/FormLabel';
 import Input from '@mui/joy/Input';
 import Button from '@mui/joy/Button';
 import Link from '@mui/joy/Link';
+import { Envelope, Password } from '@phosphor-icons/react/dist/ssr';
 
 export default function Home() {
 	return (
@@ -41,11 +42,21 @@ export default function Home() {
 				</div>
 				<FormControl id="email">
 					<FormLabel>Email</FormLabel>
-					<Input name="email" type="email" placeholder="johndoe@email.com" />
+					<Input
+						name="email"
+						type="email"
+						placeholder="johndoe@email.com"
+						startDecorator={<Envelope />}
+					/>
 				</FormControl>
 				<FormControl id="password">
 					<FormLabel>Password</FormLabel>
-					<Input name="password" type="password" placeholder="password" />
+					<Input
+						name="password"
+						type="password"
+						placeholder="password"
+						startDecorator={<Password />}
+					/>
 				</FormControl>
 				<Button sx={{ mt: 1 }}>Log in</Button>
 				<Typography
