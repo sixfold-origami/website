@@ -1,6 +1,7 @@
 import ThemeRegistry from '@/components/themeRegistry/ThemeRegistry';
 import AppBar from '@/components/AppBar';
 import getInitColorSchemeScript from '@mui/system/cssVars/getInitColorSchemeScript';
+import { Box } from '@mui/joy';
 
 export const metadata = {
 	title: 'sixfold',
@@ -23,7 +24,9 @@ export default function RootLayout({ children }) {
 				})}
 				<ThemeRegistry>
 					<AppBar />
-					{children}
+					<Box sx={{ m: 'auto', px: 2, pt: 4 }} maxWidth="md">
+						{children}
+					</Box>
 				</ThemeRegistry>
 			</body>
 		</html>
