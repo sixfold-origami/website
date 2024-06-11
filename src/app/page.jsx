@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Typography from '@mui/joy/Typography';
 import IconTest from '@/components/IconTest';
+import Link from '@/components/common/Link';
 
 export default function Home() {
 	return (
@@ -15,6 +16,17 @@ export default function Home() {
 				vulputate consequat. Praesent feugiat pretium ante eget laoreet. Vivamus
 				euismod malesuada iaculis. Phasellus aliquet posuere justo, quis
 				dignissim erat efficitur ac.
+			</Typography>
+			<Typography>
+				<Link href="/articles">Link to articles</Link>
+			</Typography>
+			<Typography>
+				<Link href="https://google.com">Link to external site</Link>
+			</Typography>
+			<Typography>
+				<Link href="https://google.com" target="_blank">
+					Link to external site (new tab)
+				</Link>
 			</Typography>
 			<IconTest />
 		</>
