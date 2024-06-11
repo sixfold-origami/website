@@ -8,8 +8,7 @@ export default function AppBar() {
 			sx={{
 				width: 1,
 				height: 40,
-				bgcolor: 'primary.main',
-				color: 'primary.main',
+				bgcolor: 'primary.main', // Does not work :sob:
 			}}
 		>
 			<Heart />
