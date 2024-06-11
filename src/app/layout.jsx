@@ -14,6 +14,7 @@ export default function RootLayout({ children }) {
 				{getInitColorSchemeScript({
 					// These properties are normally set when importing from @mui/material,
 					// but we have to set manually because we are importing from @mui/system.
+					// This is a Next.js workaround: https://github.com/mui/pigment-css/issues/132
 					attribute: 'data-joy-color-scheme',
 					modeStorageKey: 'joy-mode',
 					colorSchemeStorageKey: 'joy-color-scheme',

@@ -1,18 +1,33 @@
-import { Box } from '@mui/joy';
+import { Box, Button, Stack } from '@mui/joy';
 import { Heart } from '@phosphor-icons/react/dist/ssr';
+import Link from 'next/link';
 import * as React from 'react';
 
 export default function AppBar() {
 	return (
-		<Box
+		<Stack
 			sx={{
+				bgcolor: 'var(--joy-palette-primary-500)',
 				width: 1,
-				height: 40,
-				bgcolor: 'primary.main', // Does not work :sob:
 			}}
+			direction="row"
+			alignItems="center"
 		>
-			<Heart />
-			primary.main
-		</Box>
+			<Box sx={{ px: 2 }}>
+				<Heart />
+			</Box>
+			<AppBarLink href="/">Home</AppBarLink>
+			<AppBarLink href="/articles">Articles</AppBarLink>
+		</Stack>
 	);
 }
+
+const AppBarLink = ({ href, children }) => {
+	return (
+		<Link href={href}>
+			<Button sx={{ borderRadius: 0 }} size="lg">
+				{children}
+			</Button>
+		</Link>
+	);
+};
