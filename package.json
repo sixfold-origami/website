@@ -12,8 +12,12 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@fontsource/inter": "^5.0.18",
+    "@mdx-js/loader": "^3.0.1",
+    "@mdx-js/react": "^3.0.1",
     "@mui/joy": "^5.0.0-beta.36",
+    "@next/mdx": "^14.2.3",
     "@phosphor-icons/react": "^2.1.5",
+    "@types/mdx": "^2.0.13",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18"
