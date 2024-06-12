@@ -36,7 +36,7 @@ const theme = extendTheme({
 			styleOverrides: {
 				root: ({ theme }) => ({
 					padding: theme.spacing(1),
-					borderRadius: theme.radius.xs,
+					borderRadius: theme.radius.sm,
 				}),
 			},
 		},
