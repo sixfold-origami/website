@@ -1,16 +1,17 @@
 import { Box, Divider, Sheet, Typography } from '@mui/joy';
 import Link from '@/components/common/Link';
+import { Link as LinkIcon } from '@phosphor-icons/react/dist/ssr';
 
 export function useMDXComponents(components) {
 	return {
 		hr: () => <Divider sx={{ my: 2 }} />,
 		p: ({ children }) => <Typography>{children}</Typography>,
-		h1: ({ children }) => <Typography level="h1">{children}</Typography>,
-		h2: ({ children }) => <Typography level="h2">{children}</Typography>,
-		h3: ({ children }) => <Typography level="h3">{children}</Typography>,
-		h4: ({ children }) => <Typography level="h4">{children}</Typography>,
-		h5: ({ children }) => <Typography level="title-lg">{children}</Typography>,
-		h6: ({ children }) => <Typography level="title-md">{children}</Typography>,
+		h1: (props) => <Header level="h1" {...props} />,
+		h2: (props) => <Header level="h2" {...props} />,
+		h3: (props) => <Header level="h3" {...props} />,
+		h4: (props) => <Header level="h4" {...props} />,
+		h5: (props) => <Header level="title-lg" {...props} />,
+		h6: (props) => <Header level="title-md" {...props} />,
 		a: ({ children, ...props }) => <Link {...props}>{children}</Link>,
 		pre: ({ children, ...props }) => (
 			<Sheet component="pre" {...props}>
@@ -29,3 +30,23 @@ export function useMDXComponents(components) {
 		...components,
 	};
 }
+
+const Header = ({ level, id, children }) => {
+	return (
+		<Typography
+			id={id}
+			level={level}
+			endDecorator={<HeaderLinkDecorator id={id} />}
+		>
+			{children}
+		</Typography>
+	);
+};
+
+const HeaderLinkDecorator = ({ id }) => {
+	return (
+		<Link href={`#${id}`} sx={{ opacity: 0.25, '&:hover': { opacity: 1 } }}>
+			<LinkIcon />
+		</Link>
+	);
+};
