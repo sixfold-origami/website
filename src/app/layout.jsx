@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
 				})}
 				<ThemeRegistry>
 					<AppBar />
-					<Box sx={{ m: 'auto', px: 2, pt: 4 }} maxWidth="md">
+					<Box sx={{ m: 'auto', px: 2, pt: 4, pb: 8 }} maxWidth="md">
 						{children}
 					</Box>
 				</ThemeRegistry>
