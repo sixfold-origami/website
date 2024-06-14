@@ -1,6 +1,7 @@
-import { Box, Button, Stack } from '@mui/joy';
-import { Heart } from '@phosphor-icons/react/dist/ssr';
+import { AspectRatio, Button, Stack } from '@mui/joy';
+import Image from 'next/image';
 import Link from 'next/link';
+import sixfoldHeart from './6f heart.png';
 import * as React from 'react';
 
 export default function AppBar() {
@@ -13,9 +14,14 @@ export default function AppBar() {
 			direction="row"
 			alignItems="center"
 		>
-			<Box sx={{ px: 2 }}>
-				<Heart />
-			</Box>
+			<AspectRatio
+				variant="plain"
+				ratio="1"
+				objectFit="contain"
+				sx={{ width: 30, mx: 1 }}
+			>
+				<Image alt="sixfold heart" src={sixfoldHeart} layout="fill" />
+			</AspectRatio>
 			<AppBarLink href="/">Home</AppBarLink>
 			<AppBarLink href="/articles">Articles</AppBarLink>
 		</Stack>
