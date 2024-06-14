@@ -4,7 +4,7 @@ import getInitColorSchemeScript from '@mui/system/cssVars/getInitColorSchemeScri
 import { Box } from '@mui/joy';
 
 export const metadata = {
-	title: 'sixfold',
+	title: 'sixfold scribblings',
 	description: 'A personal site for Rose "sixfold" Peck',
 };
 
