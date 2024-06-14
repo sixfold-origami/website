@@ -1,5 +1,5 @@
 import ThemeRegistry from '@/components/themeRegistry/ThemeRegistry';
-import AppBar from '@/components/AppBar';
+import AppBar from '@/components/appBar/AppBar';
 import getInitColorSchemeScript from '@mui/system/cssVars/getInitColorSchemeScript';
 import { Box } from '@mui/joy';
 
