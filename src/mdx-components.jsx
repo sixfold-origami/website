@@ -12,6 +12,7 @@ export function useMDXComponents(components) {
 		h4: (props) => <Header level="h4" {...props} />,
 		h5: (props) => <Header level="title-lg" {...props} />,
 		h6: (props) => <Header level="title-md" {...props} />,
+		blockquote: BlockQuote,
 		a: ({ children, ...props }) => <Link {...props}>{children}</Link>,
 		pre: ({ children, ...props }) => (
 			<Sheet component="pre" {...props}>
@@ -30,6 +31,23 @@ export function useMDXComponents(components) {
 		...components,
 	};
 }
+
+const BlockQuote = ({ children }) => {
+	return (
+		<Box
+			sx={{
+				mx: 4,
+				my: 2,
+				borderLeft: 4,
+				borderColor: 'neutral.outlinedBorder',
+				pl: 2,
+			}}
+			component="blockquote"
+		>
+			{children}
+		</Box>
+	);
+};
 
 const Header = ({ level, id, children }) => {
 	return (
