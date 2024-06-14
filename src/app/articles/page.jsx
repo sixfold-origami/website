@@ -1,6 +1,6 @@
 import { getSortedPostMetadata } from '@/posts';
-import { Sheet, Stack, Typography } from '@mui/joy';
-import Link from '@/components/common/Link';
+import { Stack, Typography } from '@mui/joy';
+import PostCard from '@/components/PostCard';
 import * as React from 'react';
 
 export default async function ArticlesPage() {
@@ -17,15 +17,3 @@ export default async function ArticlesPage() {
 		</>
 	);
 }
-
-const PostCard = ({ metadata }) => (
-	<Sheet>
-		<Stack direction="row" justifyContent="space-between" sx={{ mb: 1 }}>
-			<Link href={`articles/${metadata.slug}`}>
-				<Typography>{metadata.title}</Typography>
-			</Link>
-			<Typography>{metadata.date}</Typography>
-		</Stack>
-		<Typography>{metadata.subtitle}</Typography>
-	</Sheet>
-);

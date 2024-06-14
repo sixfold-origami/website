@@ -1,34 +1,31 @@
 import * as React from 'react';
 import Typography from '@mui/joy/Typography';
-import IconTest from '@/components/IconTest';
-import Link from '@/components/common/Link';
+import { getSortedPostMetadata } from '@/posts';
+import { Stack } from '@mui/joy';
+import PostCard from '@/components/PostCard';
 
 export default function Home() {
+	const recentPosts = getSortedPostMetadata().slice(0, 3);
+
 	return (
 		<>
-			<Typography>Home page</Typography>
-			<Typography>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut metus
-				lorem. Donec fringilla, est vitae cursus laoreet, odio nisl ultricies
-				leo, non convallis nisi dolor tempor tellus. Morbi ac massa blandit,
-				bibendum orci ut, placerat nunc. Maecenas rutrum malesuada ante eu
-				varius. Maecenas vulputate ante ac dignissim gravida. Morbi mattis
-				vulputate consequat. Praesent feugiat pretium ante eget laoreet. Vivamus
-				euismod malesuada iaculis. Phasellus aliquet posuere justo, quis
-				dignissim erat efficitur ac.
+			<Typography level="h1" sx={{ mb: 2 }}>
+				Welcome, traveler
 			</Typography>
 			<Typography>
-				<Link href="/articles">Link to articles</Link>
+				My name is Rose Peck, but on the internet I usually go by sixfold. This
+				site mostly functions as my personal blog, where I write about tech,
+				programming, game design, and whatever else interests me. Why not peruse
+				some of my recent posts?
 			</Typography>
-			<Typography>
-				<Link href="https://google.com">Link to external site</Link>
+			<Typography level="h2" sx={{ mt: 4 }}>
+				Recent Posts
 			</Typography>
-			<Typography>
-				<Link href="https://google.com" target="_blank">
-					Link to external site (new tab)
-				</Link>
-			</Typography>
-			<IconTest />
+			<Stack spacing={2} sx={{ mt: 4, px: 6 }}>
+				{recentPosts.map((metadata, i) => (
+					<PostCard key={i} metadata={metadata} />
+				))}
+			</Stack>
 		</>
 	);
 }
