@@ -5,7 +5,7 @@ import { Link as LinkIcon } from '@phosphor-icons/react/dist/ssr';
 export function useMDXComponents(components) {
 	return {
 		hr: () => <Divider sx={{ my: 2 }} />,
-		p: ({ children }) => <Typography>{children}</Typography>,
+		p: ({ children }) => <Typography sx={{ mb: 2 }}>{children}</Typography>,
 		h1: (props) => <Header level="h1" {...props} />,
 		h2: (props) => <Header level="h2" {...props} />,
 		h3: (props) => <Header level="h3" {...props} />,
