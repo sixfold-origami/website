@@ -10,10 +10,26 @@ export function generateStaticParams() {
 
 export const dynamicParams = false;
 
+export async function generateMetadata({ params }, parent) {
+	const postMetadata = require(`@/posts/${params.slug}.mdx`).metadata;
+	parent = await parent;
+
+	return {
+		title: `${postMetadata.title} | ${parent.title.absolute}`,
+		description: postMetadata.subtitle,
+		openGraph: {
+			...parent.openGraph,
+			publishedTime: new Date(postMetadata.date).toISOString(),
+			authors: postMetadata.author,
+			type: 'article',
+		},
+	};
+}
+
 export default async function PostPage({ params }) {
 	const post = require(`@/posts/${params.slug}.mdx`);
-	let Content = post.default;
-	let metadata = post.metadata;
+	const Content = post.default;
+	const metadata = post.metadata;
 
 	return (
 		<>

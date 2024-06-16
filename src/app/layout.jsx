@@ -3,9 +3,23 @@ import AppBar from '@/components/appBar/AppBar';
 import getInitColorSchemeScript from '@mui/system/cssVars/getInitColorSchemeScript';
 import { Box } from '@mui/joy';
 
+const isDev = process.env.NODE_ENV !== 'production';
+const rootUrl = isDev ? 'http://localhost:3000' : 'https://sixfold-origami.com';
+
+const title = 'sixfold scribblings';
+const description =
+	'Rose "sixfold" Peck\'s weird little corner of the internet';
+
 export const metadata = {
-	title: 'sixfold scribblings',
-	description: 'A personal site for Rose "sixfold" Peck',
+	metadataBase: new URL(rootUrl),
+	title,
+	description,
+	openGraph: {
+		url: rootUrl,
+		siteName: title,
+		locale: 'en_US',
+		type: 'website',
+	},
 };
 
 export default function RootLayout({ children }) {

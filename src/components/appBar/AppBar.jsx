@@ -20,7 +20,7 @@ export default function AppBar() {
 				objectFit="contain"
 				sx={{ width: 30, mx: 1 }}
 			>
-				<Image alt="sixfold heart" src={sixfoldHeart} layout="fill" />
+				<Image alt="sixfold heart" src={sixfoldHeart} />
 			</AspectRatio>
 			<AppBarLink href="/">Home</AppBarLink>
 			<AppBarLink href="/articles">Articles</AppBarLink>
