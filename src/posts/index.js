@@ -2,7 +2,7 @@ import { readdirSync } from 'fs';
 import path from 'path';
 
 export function getPosts() {
-	const dir = path.dirname(new URL(import.meta.url).pathname);
+	const dir = path.resolve('./src', 'posts');
 
 	const posts = readdirSync(dir)
 		.map((file) => {
