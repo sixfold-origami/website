@@ -1,5 +1,5 @@
 import { Box, Sheet, Stack, Typography } from '@mui/joy';
-import { Bird } from '@phosphor-icons/react/dist/ssr';
+import Image from 'next/image';
 import * as React from 'react';
 
 // Custom arrow styles borrowed from: https://cssarrowplease.com/
@@ -18,7 +18,12 @@ const arrowStyle = {
 };
 const outlineThickness = arrowSizePx + Math.round(borderThicknessPx * 1.414);
 
-export default async function PostCard({ children }) {
+export default async function SpeechBubble({
+	children,
+	color,
+	imgSrc,
+	imgAlt,
+}) {
 	return (
 		<>
 			<Stack
@@ -27,30 +32,30 @@ export default async function PostCard({ children }) {
 				spacing={3}
 				sx={{ my: 2, pl: 3, pr: 4 }}
 			>
-				<Typography fontSize={40} endDecorator={<Bird />} />
+				<Image src={imgSrc} alt={imgAlt} width={75} height={75} />
 				<Box flexGrow={1}>
 					<Sheet
 						variant="soft"
-						color="primary"
+						color="neutral"
 						sx={{
 							px: 2,
 							border: borderThicknessPx,
-							borderColor: 'primary.outlinedBorder',
+							borderColor: 'neutral.outlinedBorder',
 							'&::before': {
 								...arrowStyle,
-								borderRightColor: 'primary.outlinedBorder',
+								borderRightColor: 'neutral.outlinedBorder',
 								borderWidth: outlineThickness,
 								mt: `-${outlineThickness}px`,
 							},
 							'&::after': {
 								...arrowStyle,
-								borderRightColor: 'primary.softBg',
+								borderRightColor: 'neutral.softBg',
 								borderWidth: arrowSizePx,
 								mt: `-${arrowSizePx}px`,
 							},
 						}}
 					>
-						<Typography>{children}</Typography>
+						<Typography color={color}>{children}</Typography>
 					</Sheet>
 				</Box>
 			</Stack>
