@@ -1,4 +1,4 @@
-import { getPosts } from '@/Posts';
+import { getPosts } from '@/posts';
 import { Divider, Stack, Typography } from '@mui/joy';
 import * as React from 'react';
 

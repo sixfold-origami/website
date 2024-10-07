@@ -1,6 +1,6 @@
-import { getSortedPostMetadata } from '@/Posts';
+import { getSortedPostMetadata } from '@/posts';
 import { Stack, Typography } from '@mui/joy';
-import PostCard from '@/Components/common/PostCard';
+import PostCard from '@/components/common/PostCard';
 import * as React from 'react';
 
 export default async function ArticlesPage() {
