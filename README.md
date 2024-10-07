@@ -1,6 +1,7 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/22f58634-0afb-4f97-b02f-5c485c3f7dc7/deploy-status)](https://app.netlify.com/sites/sixfold/deploys)
 
-A personal site built with [Next.js](https://nextjs.org/)
+A personal site built with [Next.js](https://nextjs.org/).
+You can check the current work to do at [TODO.md](./TODO.md)
 
 ## Getting Started
 
