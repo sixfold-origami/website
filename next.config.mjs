@@ -5,6 +5,19 @@ import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 
+const cspHeader = `
+	default-src 'self';
+	script-src 'self' 'strict-dynamic';
+	style-src 'self' 'unsafe-inline';
+	img-src 'self' blob: data:;
+	font-src 'self';
+	object-src 'none';
+	base-uri 'self';
+	form-action 'self';
+	frame-ancestors 'none';
+	upgrade-insecure-requests;
+`;
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	reactStrictMode: true,
@@ -12,6 +25,19 @@ const nextConfig = {
 	pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
 	env: {
 		NEXT_TELEMETRY_DISABLED: '1',
+	},
+	async headers() {
+		return [
+			{
+				source: '/(.*)',
+				headers: [
+					{
+						key: 'Content-Security-Policy',
+						value: cspHeader.replace(/\n/g, ''),
+					},
+				],
+			},
+		];
 	},
 };
 
