@@ -1,5 +1,5 @@
 import { Sheet, Stack, Typography } from '@mui/joy';
-import Link from '@/components/common/Link';
+import Link from '@/Components/common/Link';
 import * as React from 'react';
 
 export default async function PostCard({ metadata }) {

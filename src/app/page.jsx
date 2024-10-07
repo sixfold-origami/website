@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Typography from '@mui/joy/Typography';
-import { getSortedPostMetadata } from '@/posts';
+import { getSortedPostMetadata } from '@/Posts';
 import { Stack } from '@mui/joy';
-import PostCard from '@/components/common/PostCard';
+import PostCard from '@/Components/common/PostCard';
 
 export default function Home() {
 	const recentPosts = getSortedPostMetadata().slice(0, 3);
