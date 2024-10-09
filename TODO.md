@@ -14,3 +14,4 @@
 	- Cicada
 - Add an RSS feed
 - Add a mailing list
+- Add a `published` flag to the frontmatter, so that we can merge posts in progress to main without actually publishing them
