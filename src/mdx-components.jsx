@@ -15,7 +15,7 @@ export function useMDXComponents(components) {
 		blockquote: BlockQuote,
 		a: ({ children, ...props }) => <Link {...props}>{children}</Link>,
 		pre: ({ children, ...props }) => (
-			<Sheet component="pre" {...props}>
+			<Sheet component="pre" sx={{ overflowX: 'auto' }} {...props}>
 				{children}
 			</Sheet>
 		),
@@ -27,6 +27,16 @@ export function useMDXComponents(components) {
 			>
 				{children}
 			</Box>
+		),
+		span: ({ children, ...props }) => (
+			<span
+				style={{
+					paddingRight: props['data-line'] == '' ? '0.75em' : undefined,
+				}}
+				{...props}
+			>
+				{children}
+			</span>
 		),
 		...components,
 	};
