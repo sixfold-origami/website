@@ -5,16 +5,21 @@ date: "2024-10-09"
 author: "Rose Peck"
 ---
 
+import TextBlock from '@/components/common/TextBlock';
+import { Box } from '@mui/joy';
+
 Every project management tool, framework, or methodology needs a catchy acronym, right?
 
-```
-- [🔴 required] We need a single source of truth for our product data
-- [🔴 required] Cost of server resources must stay within the budget projections for this quarter
-- [🟡 expected] We can integrate our data storage with external tools and systems if we need to, to pull in any contextual information that they might store
-- [🟡 expected] Our system can export data to CSV format
-- [🔵 desired] Our system can export product data directly to external systems, like our CRM
-- [🔵 desired] Inlucde some kind of tracking or audit system that shows who inputted what data into the system
-```
+<TextBlock>
+	<Box sx={{mr: 1}}>
+		1. [🔴 required] We need a single source of truth for our product data
+		1. [🔴 required] Cost of server resources must stay within the outlined budget
+		1. [🔴 required] We can integrate our data storage with external tools and systems if we need to, to pull in any contextual information that they might store
+		1. [🟡 expected] Our system can export data to CSV format
+		1. [🟡 expected] Our system can export product data directly to external systems, like our CRM
+		1. [🔵 desired] Inlucde some kind of tracking or audit system that shows who inputted what data into the system
+	</Box>
+</TextBlock>
 
 Whenever I'm designing a feature, writing an RFD, or putting together a new architecture, I start by writing out the relevant **constraints**.
 These define both the goals of the new system (what it's trying to achieve, what it must accomplish, etc.), but also any limits that must be avoided (what costs are unacceptable, what features are explicitly out of scope, etc.).
@@ -29,3 +34,5 @@ So, when writing out my constraints, I use **RED**:
 - **Required:** These are things that must be satisfied for the work to be considered complete
 - **Expected:** This is a middle category for things that I would expect to see in a full solution, or that we really want, but can sacrifice if it ends up being a pain
 - **Desired:** Things which are nice to have. Good to add if we have time, but quickly cut if we start running out of scope
+
+The block above shows an example of this system in use.
