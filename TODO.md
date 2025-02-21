@@ -12,6 +12,11 @@
 - Make more character speech bubbles
 	- Frog
 	- Cicada
-- Add an RSS feed
-- Add a mailing list
+- Notifying people about posts
+	- Add an RSS feed
+	- Add a mailing list
+	- Add a footer with links to the RSS feed and mailing list
 - Add a `published` flag to the frontmatter, so that we can merge posts in progress to main without actually publishing them
+- Increase horizontal padding slightly on post cards
+- Add a page for notable projects
+- Add a GitHub link somewhere (maybe in the titlebar, maybe on an "about me" page)
