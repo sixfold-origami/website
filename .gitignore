@@ -17,6 +17,7 @@
 /build
 public/robots.txt
 public/sitemap*.xml
+public/rss.xml
 
 # misc
 .DS_Store
