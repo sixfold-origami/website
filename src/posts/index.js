@@ -35,7 +35,7 @@ export function getSortedPostMetadata() {
 		});
 }
 
-function generateRSS() {
+export function generateRSS() {
 	const feedOptions = {
 		title: `${TITLE} | RSS Feed`,
 		description: DESCRIPTION,
@@ -57,7 +57,5 @@ function generateRSS() {
 		});
 	});
 
-	writeFileSync('./public/rss.xml', feed.xml({ indent: true }));
+	return feed.xml({ indent: true });
 }
-
-generateRSS();
