@@ -1,3 +1,4 @@
+import { DESCRIPTION, ROOT_URL, TITLE } from '@/consts';
 import { readdirSync, writeFileSync } from 'fs';
 import path from 'path';
 import RSS from 'rss';
@@ -34,22 +35,13 @@ export function getSortedPostMetadata() {
 		});
 }
 
-// TODO: MOVE THESE FROM layout.jsx TO A COMMON PLACE AND DELETE THIS DUPLICATED COPY
-const isDev = process.env.NODE_ENV !== 'production';
-const rootUrl = isDev ? 'http://localhost:3000' : 'https://sixfold-origami.com';
-
-const title = 'sixfold scribblings';
-const description =
-	'Rose "sixfold" Peck\'s weird little corner of the internet';
-// END TODO
-
 function generateRSS() {
 	const feedOptions = {
-		title: `${title} | RSS Feed`,
-		description,
-		site_url: rootUrl,
-		feed_url: `${rootUrl}/rss.xml`,
-		image_url: `${rootUrl}/opengraph-image.png`,
+		title: `${TITLE} | RSS Feed`,
+		description: DESCRIPTION,
+		site_url: ROOT_URL,
+		feed_url: `${ROOT_URL}/rss.xml`,
+		image_url: `${ROOT_URL}/opengraph-image.png`,
 		pubDate: new Date(),
 		copyright: `All rights reserved ${new Date().getFullYear()}`,
 	};
@@ -60,7 +52,7 @@ function generateRSS() {
 		feed.item({
 			title: p.title,
 			description: p.subtitle,
-			url: `${rootUrl}/articles/${p.slug}`,
+			url: `${ROOT_URL}/articles/${p.slug}`,
 			date: p.date,
 		});
 	});

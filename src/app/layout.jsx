@@ -1,22 +1,16 @@
 import AppBar from '@/components/appBar/AppBar';
 import ThemeRegistry from '@/components/themeRegistry/ThemeRegistry';
 import getInitColorSchemeScript from '@mui/system/cssVars/getInitColorSchemeScript';
+import { DESCRIPTION, ROOT_URL, TITLE } from '@/consts';
 import { Box } from '@mui/joy';
 
-const isDev = process.env.NODE_ENV !== 'production';
-const rootUrl = isDev ? 'http://localhost:3000' : 'https://sixfold-origami.com';
-
-const title = 'sixfold scribblings';
-const description =
-	'Rose "sixfold" Peck\'s weird little corner of the internet';
-
 export const metadata = {
-	metadataBase: new URL(rootUrl),
-	title,
-	description,
+	metadataBase: new URL(ROOT_URL),
+	title: TITLE,
+	description: DESCRIPTION,
 	openGraph: {
-		url: rootUrl,
-		siteName: title,
+		url: ROOT_URL,
+		siteName: TITLE,
 		locale: 'en_US',
 		type: 'website',
 	},
