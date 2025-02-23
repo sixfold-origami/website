@@ -1,7 +1,8 @@
-import { AspectRatio, Button, Stack } from '@mui/joy';
+import { AspectRatio, Box, Button, Stack } from '@mui/joy';
 import Image from 'next/image';
 import Link from 'next/link';
 import sixfoldHeart from './6f heart.png';
+import RssButton from '@/components/common/RssButton';
 import * as React from 'react';
 
 export default function AppBar() {
@@ -24,6 +25,9 @@ export default function AppBar() {
 			</AspectRatio>
 			<AppBarLink href="/">Home</AppBarLink>
 			<AppBarLink href="/articles">Articles</AppBarLink>
+			<Box sx={{ ml: 'auto' }}>
+				<RssButton sx={{ borderRadius: 0 }} size="lg" />
+			</Box>
 		</Stack>
 	);
 }

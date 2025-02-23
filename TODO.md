@@ -13,9 +13,8 @@
 	- Frog
 	- Cicada
 - Notifying people about posts
-	- Add an RSS feed
 	- Add a mailing list
-	- Add a footer with links to the RSS feed and mailing list
+	- Add a link to the mailing list (footer? app bar?)
 - Add a `published` flag to the frontmatter, so that we can merge posts in progress to main without actually publishing them
 - Increase horizontal padding slightly on post cards
 - Add a page for notable projects

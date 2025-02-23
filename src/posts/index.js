@@ -1,5 +1,7 @@
+import { DESCRIPTION, ROOT_URL, TITLE } from '@/consts';
 import { readdirSync } from 'fs';
 import path from 'path';
+import RSS from 'rss';
 
 export function getPosts() {
 	const dir = path.resolve('./src', 'posts');
@@ -31,4 +33,29 @@ export function getSortedPostMetadata() {
 				return -1;
 			}
 		});
+}
+
+export function generateRSS() {
+	const feedOptions = {
+		title: TITLE,
+		description: DESCRIPTION,
+		site_url: ROOT_URL,
+		feed_url: `${ROOT_URL}/rss`,
+		image_url: `${ROOT_URL}/opengraph-image.png`,
+		pubDate: new Date(),
+		copyright: `All rights reserved ${new Date().getFullYear()}`,
+	};
+	const feed = new RSS(feedOptions);
+
+	const posts = getSortedPostMetadata();
+	posts.map((p) => {
+		feed.item({
+			title: p.title,
+			description: p.subtitle,
+			url: `${ROOT_URL}/articles/${p.slug}`,
+			date: p.date,
+		});
+	});
+
+	return feed.xml({ indent: true });
 }

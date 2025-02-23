@@ -28,6 +28,7 @@
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.0",
     "remark-mdx-frontmatter": "^4.0.0",
+    "rss": "^1.2.2",
     "sharp": "^0.33.4"
   },
   "devDependencies": {
