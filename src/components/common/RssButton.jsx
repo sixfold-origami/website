@@ -11,6 +11,7 @@ export default function RssButton(props) {
 	return (
 		<Button
 			{...props}
+			aria-label="Copy RSS feed link"
 			onClick={() => {
 				navigator.clipboard.writeText(`${ROOT_URL}/rss`);
 				setBarOpen(true);
