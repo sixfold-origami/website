@@ -9,18 +9,20 @@ export default function RssButton(props) {
 	let [barOpen, setBarOpen] = React.useState();
 
 	return (
-		<Button
-			{...props}
-			aria-label="Copy RSS feed link"
-			onClick={() => {
-				navigator.clipboard.writeText(`${ROOT_URL}/rss`);
-				setBarOpen(true);
-			}}
-		>
-			<RssIcon />
+		<>
+			<Button
+				{...props}
+				aria-label="Copy RSS feed link"
+				onClick={() => {
+					navigator.clipboard.writeText(`${ROOT_URL}/rss`);
+					setBarOpen(true);
+				}}
+			>
+				<RssIcon />
+			</Button>
 			<Snackbar
 				open={barOpen}
-				autoHideDuration={3000}
+				autoHideDuration={2000}
 				onClose={() => setBarOpen(false)}
 				color="primary"
 				sx={{ top: 56 }}
@@ -28,6 +30,6 @@ export default function RssButton(props) {
 			>
 				RSS link copied to clipboard!
 			</Snackbar>
-		</Button>
+		</>
 	);
 }

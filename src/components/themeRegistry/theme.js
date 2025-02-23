@@ -1,7 +1,7 @@
 import { extendTheme } from '@mui/joy/styles';
-import { Inter, Source_Code_Pro } from 'next/font/google';
+import { Source_Code_Pro, Vollkorn } from 'next/font/google';
 
-const inter = Inter({
+const vollkorn = Vollkorn({
 	subsets: ['latin'],
 	adjustFontFallback: false, // prevent NextJS from adding its own fallback font
 	fallback: ['var(--joy-fontFamily-fallback)'], // use Joy UI's fallback font
@@ -29,6 +29,7 @@ const theme = extendTheme({
 	colorSchemes: {
 		dark: {
 			palette: {
+				// Tailwind emerald
 				primary: {
 					50: '#ecfdf5',
 					100: '#d1fae5',
@@ -41,18 +42,33 @@ const theme = extendTheme({
 					800: '#065f46',
 					900: '#064e3b',
 				},
+				// Tailwind zinc
+				// neutral: {
+				// 	50: '#fafafa',
+				// 	100: '#f4f4f5',
+				// 	200: '#e4e4e7',
+				// 	300: '#d4d4d8',
+				// 	400: '#a1a1aa',
+				// 	500: '#71717a',
+				// 	600: '#52525b',
+				// 	700: '#3f3f46',
+				// 	800: '#27272a',
+				// 	900: '#18181b',
+				// },
+				// Tailwind stone
 				neutral: {
-					50: '#fafafa',
-					100: '#f4f4f5',
-					200: '#e4e4e7',
-					300: '#d4d4d8',
-					400: '#a1a1aa',
-					500: '#71717a',
-					600: '#52525b',
-					700: '#3f3f46',
-					800: '#27272a',
-					900: '#18181b',
+					50: '#fafaf9',
+					100: '#f5f5f4',
+					200: '#e7e5e4',
+					300: '#d6d3d1',
+					400: '#a8a29e',
+					500: '#78716c',
+					600: '#57534e',
+					700: '#44403c',
+					800: '#292524',
+					900: '#1c1917',
 				},
+				// Tailwind amber
 				amber: {
 					50: '#fffbeb',
 					100: '#fef3c7',
@@ -65,6 +81,7 @@ const theme = extendTheme({
 					800: '#92400e',
 					900: '#78350f',
 				},
+				// The default body background is #000. Lighten everything up a bit.
 				background: {
 					body: 'var(--joy-palette-neutral-900)',
 					surface: 'var(--joy-palette-neutral-800)',
@@ -74,12 +91,14 @@ const theme = extendTheme({
 					level3: 'var(--joy-palette-neutral-500)',
 					tooltip: 'var(--joy-palette-neutral-500)',
 				},
+				divider:
+					'rgba(var(--joy-palette-neutral-mainChannel, 99 107 116) / 0.32)',
 			},
 		},
 	},
 	fontFamily: {
-		body: inter.style.fontFamily,
-		display: inter.style.fontFamily,
+		body: vollkorn.style.fontFamily,
+		display: vollkorn.style.fontFamily,
 		code: sourceCodePro.style.fontFamily,
 	},
 	components: {
