@@ -7,7 +7,7 @@ import * as React from 'react';
 
 export default function AppBar() {
 	return (
-		<Box sx={{ bgcolor: 'var(--joy-palette-neutral-800)', width: 1 }}>
+		<Box sx={{ bgcolor: 'neutral.800', width: 1 }}>
 			<Stack
 				direction="row"
 				alignItems="center"
@@ -51,7 +51,7 @@ const AppBarLink = ({ href, children }) => {
 	return (
 		<Link href={href} component="button" color="neutral">
 			<Typography
-				textColor="var(--joy-palette-neutral-300)"
+				textColor="neutral.300"
 				sx={{
 					mx: 1,
 					my: 0.8,
