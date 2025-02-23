@@ -1,5 +1,13 @@
-import { AspectRatio, Box, Divider, Stack, Typography } from '@mui/joy';
+import {
+	AspectRatio,
+	Box,
+	Divider,
+	Stack,
+	Typography,
+	Link as JoyLink,
+} from '@mui/joy';
 import Image from 'next/image';
+import { GithubLogo } from '@phosphor-icons/react/dist/ssr';
 import Link from '@/components/common/Link';
 import sixfoldHeart from './6f heart.png';
 import RssButton from '@/components/common/RssButton';
@@ -26,9 +34,23 @@ export default function AppBar() {
 						<Typography level="h4">sixfold scribblings</Typography>
 					</Stack>
 				</Link>
-				<Box sx={{ ml: 'auto' }}>
+				<Stack direction="row" alignItems="center" sx={{ ml: 'auto' }} gap={1}>
+					<JoyLink
+						href="https://github.com/sixfold-origami"
+						target="_blank"
+						rel="noreferrer"
+						color="neutral"
+						sx={{
+							'--Icon-fontSize': '24px',
+							'&:hover': {
+								'--Icon-color': 'var(--joy-palette-primary-500)',
+							},
+						}}
+					>
+						<GithubLogo />
+					</JoyLink>
 					<RssButton />
-				</Box>
+				</Stack>
 			</Stack>
 			<Divider sx={{ mb: 0.4 }} />
 			<Divider />

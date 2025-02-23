@@ -16,4 +16,3 @@
 	- Add a mailing list
 	- Add a link to the mailing list (footer? app bar?)
 - Add a page for notable projects
-- Add a GitHub link somewhere (maybe in the titlebar, maybe on an "about me" page)
