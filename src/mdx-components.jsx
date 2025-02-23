@@ -28,16 +28,6 @@ export function useMDXComponents(components) {
 				{children}
 			</Box>
 		),
-		span: ({ children, ...props }) => (
-			<span
-				style={{
-					paddingRight: props['data-line'] == '' ? '0.75em' : undefined,
-				}}
-				{...props}
-			>
-				{children}
-			</span>
-		),
 		...components,
 	};
 }
