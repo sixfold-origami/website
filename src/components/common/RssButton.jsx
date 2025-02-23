@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Snackbar, Typography, Link } from '@mui/joy';
+import { Snackbar, Link } from '@mui/joy';
 import { Rss as RssIcon } from '@phosphor-icons/react/dist/ssr';
 import { ROOT_URL } from '@/consts';
 import * as React from 'react';
