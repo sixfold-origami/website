@@ -28,16 +28,6 @@ export function useMDXComponents(components) {
 				{children}
 			</Box>
 		),
-		span: ({ children, ...props }) => (
-			<span
-				style={{
-					paddingRight: props['data-line'] == '' ? '0.75em' : undefined,
-				}}
-				{...props}
-			>
-				{children}
-			</span>
-		),
 		...components,
 	};
 }
@@ -74,7 +64,14 @@ const Header = ({ level, id, children }) => {
 
 const HeaderLinkDecorator = ({ id }) => {
 	return (
-		<Link href={`#${id}`} sx={{ opacity: 0.25, '&:hover': { opacity: 1 } }}>
+		<Link
+			href={`#${id}`}
+			sx={{
+				'--Icon-fontSize': '0.9em',
+				opacity: 0.25,
+				'&:hover': { opacity: 1 },
+			}}
+		>
 			<LinkIcon />
 		</Link>
 	);

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Typography from '@mui/joy/Typography';
 import { getSortedPostMetadata } from '@/posts';
-import { Stack } from '@mui/joy';
+import { Divider, Stack } from '@mui/joy';
 import PostCard from '@/components/common/PostCard';
 
 export default function Home() {
@@ -21,7 +21,7 @@ export default function Home() {
 			<Typography level="h2" sx={{ mt: 4 }}>
 				Recent Posts
 			</Typography>
-			<Stack spacing={2} sx={{ mt: 4, px: 6 }}>
+			<Stack spacing={2} sx={{ mt: 4, px: 6 }} divider={<Divider />}>
 				{recentPosts.map((metadata, i) => (
 					<PostCard key={i} metadata={metadata} />
 				))}

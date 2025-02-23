@@ -1,43 +1,60 @@
-import { AspectRatio, Box, Button, Stack } from '@mui/joy';
+import { AspectRatio, Box, Divider, Stack, Typography } from '@mui/joy';
 import Image from 'next/image';
-import Link from 'next/link';
+import Link from '@/components/common/Link';
 import sixfoldHeart from './6f heart.png';
 import RssButton from '@/components/common/RssButton';
 import * as React from 'react';
 
 export default function AppBar() {
 	return (
-		<Stack
-			sx={{
-				bgcolor: 'var(--joy-palette-primary-500)',
-				width: 1,
-			}}
-			direction="row"
-			alignItems="center"
-		>
-			<AspectRatio
-				variant="plain"
-				ratio="1"
-				objectFit="contain"
-				sx={{ width: 30, mx: 1 }}
+		<Box sx={{ bgcolor: 'neutral.800', width: 1 }}>
+			<Stack
+				direction="row"
+				alignItems="center"
+				sx={{ maxWidth: 1300, mx: 'auto' }}
 			>
-				<Image alt="sixfold heart" src={sixfoldHeart} />
-			</AspectRatio>
-			<AppBarLink href="/">Home</AppBarLink>
-			<AppBarLink href="/articles">Articles</AppBarLink>
-			<Box sx={{ ml: 'auto' }}>
-				<RssButton sx={{ borderRadius: 0 }} size="lg" />
-			</Box>
-		</Stack>
+				<Link href="/" color="neutral">
+					<Stack direction="row" alignItems="center">
+						<AspectRatio
+							variant="plain"
+							ratio="1"
+							objectFit="contain"
+							sx={{ width: 30, mx: 1.5 }}
+						>
+							<Image alt="sixfold heart" src={sixfoldHeart} />
+						</AspectRatio>
+						<Typography level="h4">sixfold scribblings</Typography>
+					</Stack>
+				</Link>
+				<Box sx={{ ml: 'auto' }}>
+					<RssButton />
+				</Box>
+			</Stack>
+			<Divider sx={{ mb: 0.4 }} />
+			<Divider />
+			<Stack direction="row" alignItems="center" justifyContent="center">
+				<AppBarLink href="/">Home</AppBarLink>
+				<AppBarLink href="/articles">Articles</AppBarLink>
+			</Stack>
+			<Divider sx={{ mb: 0.4 }} />
+			<Divider />
+		</Box>
 	);
 }
 
 const AppBarLink = ({ href, children }) => {
 	return (
-		<Link href={href}>
-			<Button sx={{ borderRadius: 0 }} size="lg">
+		<Link href={href} component="button" color="neutral">
+			<Typography
+				textColor="neutral.300"
+				sx={{
+					mx: 1,
+					my: 0.8,
+					fontWeight: 600,
+				}}
+			>
 				{children}
-			</Button>
+			</Typography>
 		</Link>
 	);
 };
