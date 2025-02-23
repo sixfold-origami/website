@@ -27,12 +27,7 @@ export default function AppBar() {
 					</Stack>
 				</Link>
 				<Box sx={{ ml: 'auto' }}>
-					<RssButton
-						sx={{ my: 1, px: 1, py: 0.5, minHeight: 0 }}
-						size="lg"
-						color="neutral"
-						variant="soft"
-					/>
+					<RssButton />
 				</Box>
 			</Stack>
 			<Divider sx={{ mb: 0.4 }} />
