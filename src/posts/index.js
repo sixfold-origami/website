@@ -1,4 +1,4 @@
-import { DESCRIPTION, ROOT_URL, TITLE } from '@/consts';
+import { DESCRIPTION, IS_DEV, ROOT_URL, TITLE } from '@/consts';
 import { readdirSync } from 'fs';
 import path from 'path';
 import RSS from 'rss';
@@ -24,7 +24,7 @@ export function getSortedPostMetadata() {
 			const post = require(`@/posts/${filename}.mdx`);
 			return { ...post.metadata, ...{ slug: filename } };
 		})
-		.filter((metadata) => metadata.published)
+		.filter((metadata) => metadata.published || IS_DEV)
 		.sort((a, b) => {
 			if (a.date === b.date) {
 				return 0;
