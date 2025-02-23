@@ -34,7 +34,7 @@ export default async function PostPage({ params }) {
 	return (
 		<>
 			<Typography level="h1">{metadata.title}</Typography>
-			<Typography sx={{ mb: 1 }}>
+			<Typography sx={{ mb: 1.5 }}>
 				<i>{metadata.subtitle}</i>
 			</Typography>
 			<Stack direction="row">
@@ -42,7 +42,7 @@ export default async function PostPage({ params }) {
 				<Divider orientation="vertical" sx={{ mx: 2 }} />
 				<Typography>{metadata.date}</Typography>
 			</Stack>
-			<Divider sx={{ my: 2 }} />
+			<Divider sx={{ mt: 1, mb: 2 }} />
 			<Content />
 		</>
 	);
