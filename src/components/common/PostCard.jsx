@@ -4,7 +4,7 @@ import * as React from 'react';
 
 export default async function PostCard({ metadata }) {
 	return (
-		<Sheet>
+		<Sheet sx={{ px: 1.5 }}>
 			<Stack direction="row" justifyContent="space-between" sx={{ mb: 1 }}>
 				<Link href={`articles/${metadata.slug}`}>
 					<Typography>{metadata.title}</Typography>
