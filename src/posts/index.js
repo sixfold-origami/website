@@ -19,21 +19,24 @@ export function getPosts() {
 }
 
 export function getSortedPostMetadata() {
-	return getPosts()
-		.map((filename) => {
-			const post = require(`@/posts/${filename}.mdx`);
-			return { ...post.metadata, ...{ slug: filename } };
-		})
-		.filter((metadata) => metadata.published || IS_DEV)
-		.sort((a, b) => {
-			if (a.date === b.date) {
-				return 0;
-			} else if (a.date < b.date) {
-				return 1;
-			} else if (a.date > b.date) {
-				return -1;
-			}
-		});
+	return (
+		getPosts()
+			.map((filename) => {
+				const post = require(`@/posts/${filename}.mdx`);
+				return { ...post.metadata, ...{ slug: filename } };
+			})
+			// Don't show unpublished posts, unless we're in dev mode
+			.filter((metadata) => metadata.published || IS_DEV)
+			.sort((a, b) => {
+				if (a.date === b.date) {
+					return 0;
+				} else if (a.date < b.date) {
+					return 1;
+				} else if (a.date > b.date) {
+					return -1;
+				}
+			})
+	);
 }
 
 export function generateRSS() {
