@@ -24,6 +24,7 @@ export function getSortedPostMetadata() {
 			const post = require(`@/posts/${filename}.mdx`);
 			return { ...post.metadata, ...{ slug: filename } };
 		})
+		.filter((metadata) => metadata.published)
 		.sort((a, b) => {
 			if (a.date === b.date) {
 				return 0;
