@@ -1,7 +1,30 @@
+import { Input, Typography } from '@mui/joy';
+import SubmitButtion from '@/components/mailingList/SubmitButton';
 import * as React from 'react';
 
 export default async function MailingListPage() {
-	return <div dangerouslySetInnerHTML={{ __html: MAILER_HTML }}></div>;
+	return (
+		<>
+			<Typography level="h1">Newsletter</Typography>
+			<Typography>
+				Enter your email to be added to my newsletter. You&apos;ll get an email
+				every time a new post is released.
+			</Typography>
+			<form
+				action="https://assets.mailerlite.com/jsonp/1349617/forms/147169945309939593/subscribe"
+				method="post"
+			>
+				<Input
+					required
+					type="email"
+					name="fields[email]"
+					placeholder="Email"
+					autoComplete="email"
+				/>
+				<SubmitButtion />
+			</form>
+		</>
+	);
 }
 
 const MAILER_HTML = String.raw`<style type="text/css">@import url("https://assets.mlcdn.com/fonts.css?version=1739956");</style>

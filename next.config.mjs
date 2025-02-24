@@ -7,12 +7,10 @@ import rehypeSlug from 'rehype-slug';
 
 const cspHeader = `
 	default-src 'self' ;
-	script-src 'self' groot.mailerlite.com assets.mlcdn.com assets.mailerlite.com 'unsafe-eval' 'unsafe-inline';
-	style-src 'self' assets.mlcdn.com fonts.mailerlite.com 'unsafe-inline';
-	connect-src 'self' assets.mailerlite.com;
+	script-src 'self' 'unsafe-eval' 'unsafe-inline';
+	style-src 'self' 'unsafe-inline';
 	img-src 'self' blob: data:;
-	font-src 'self' fonts.mailerlite.com;
-	form-action 'self' assets.mailerlite.com;
+	font-src 'self';
 	object-src 'none';
 	base-uri 'self';
 	form-action 'self';
