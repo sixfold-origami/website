@@ -12,8 +12,5 @@
 - Make more character speech bubbles
 	- Frog
 	- Cicada
-- Notifying people about posts
-	- Add a mailing list
-	- Add a link to the mailing list (footer? app bar?)
 - Add a page for notable projects
 - Fix hydration error on the RED post
