@@ -6,10 +6,11 @@ import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 
 const cspHeader = `
-	default-src 'self';
+	default-src 'self' ;
 	script-src 'self' 'unsafe-eval' 'unsafe-inline';
 	style-src 'self' 'unsafe-inline';
 	img-src 'self' blob: data:;
+	connect-src 'self' assets.mailerlite.com;
 	font-src 'self';
 	object-src 'none';
 	base-uri 'self';

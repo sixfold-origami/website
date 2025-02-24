@@ -1,14 +1,11 @@
-import {
-	AspectRatio,
-	Box,
-	Divider,
-	Stack,
-	Typography,
-	Link as JoyLink,
-} from '@mui/joy';
+import { AspectRatio, Box, Divider, Stack, Typography } from '@mui/joy';
 import Image from 'next/image';
-import { GithubLogo } from '@phosphor-icons/react/dist/ssr';
+import {
+	GithubLogo,
+	EnvelopeSimple as MailIcon,
+} from '@phosphor-icons/react/dist/ssr';
 import Link from '@/components/common/Link';
+import IconLink from '@/components/common/IconLink';
 import sixfoldHeart from './6f heart.png';
 import RssButton from '@/components/common/RssButton';
 import * as React from 'react';
@@ -21,6 +18,7 @@ export default function AppBar() {
 				alignItems="center"
 				sx={{ maxWidth: 1300, mx: 'auto' }}
 			>
+				{/* Page title */}
 				<Link href="/" color="neutral">
 					<Stack direction="row" alignItems="center">
 						<AspectRatio
@@ -34,26 +32,28 @@ export default function AppBar() {
 						<Typography level="h4">sixfold scribblings</Typography>
 					</Stack>
 				</Link>
-				<Stack direction="row" alignItems="center" sx={{ ml: 'auto' }} gap={1}>
-					<JoyLink
-						href="https://github.com/sixfold-origami"
-						target="_blank"
-						rel="noreferrer"
-						color="neutral"
-						sx={{
-							'--Icon-fontSize': '24px',
-							'&:hover': {
-								'--Icon-color': 'var(--joy-palette-primary-500)',
-							},
-						}}
-					>
+
+				{/* Icon links (socials, RSS, etc.) */}
+				<Stack
+					direction="row"
+					alignItems="center"
+					sx={{ ml: 'auto', mr: 1 }}
+					gap={2}
+				>
+					<IconLink href="https://github.com/sixfold-origami" target="_blank">
 						<GithubLogo />
-					</JoyLink>
+					</IconLink>
+					<IconLink href="/newsletter">
+						<MailIcon />
+					</IconLink>
 					<RssButton />
 				</Stack>
 			</Stack>
+
 			<Divider sx={{ mb: 0.4 }} />
 			<Divider />
+
+			{/* Row 2: Navigation */}
 			<Stack direction="row" alignItems="center" justifyContent="center">
 				<AppBarLink href="/">Home</AppBarLink>
 				<AppBarLink href="/articles">Articles</AppBarLink>
