@@ -12,7 +12,7 @@ export default function NewsletterPage() {
 				Enter your email to be added to my newsletter. You&apos;ll get an email
 				every time a new post is released.
 			</Typography>
-			<Box sx={{ pt: 2 }}>
+			<Box sx={{ mt: 2, maxWidth: 'sm', mx: 'auto' }}>
 				<NewsletterForm />
 			</Box>
 		</>

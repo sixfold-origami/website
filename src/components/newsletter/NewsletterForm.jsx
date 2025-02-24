@@ -1,6 +1,14 @@
 'use client';
 
-import { Alert, Button, Input, Link, Stack, Typography } from '@mui/joy';
+import {
+	Alert,
+	Button,
+	CircularProgress,
+	Input,
+	Link,
+	Stack,
+	Typography,
+} from '@mui/joy';
 import {
 	Warning as ErrorIcon,
 	CheckCircle as SuccessIcon,
@@ -9,8 +17,9 @@ import * as React from 'react';
 
 export default function SubmitButtion() {
 	const [state, setState] = React.useState('init');
+	const submitting = state === 'submitting';
 
-	if (state === 'init' || state === 'submitting') {
+	if (state === 'init' || submitting) {
 		return (
 			<form
 				onSubmit={(ev) => {
@@ -46,9 +55,18 @@ export default function SubmitButtion() {
 						name="email"
 						placeholder="Email"
 						autoComplete="email"
+						sx={{
+							flexGrow: 1,
+						}}
 					/>
-					<Button type="submit" disabled={state === 'submitting'}>
-						{state === 'submitting' ? 'Submitting...' : 'Sign up'}
+					<Button
+						type="submit"
+						disabled={submitting}
+						startDecorator={
+							submitting ? <CircularProgress color="neutral" /> : undefined
+						}
+					>
+						{submitting ? 'Submitting...' : 'Sign up'}
 					</Button>
 				</Stack>
 			</form>
