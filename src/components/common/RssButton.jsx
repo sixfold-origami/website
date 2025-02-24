@@ -13,7 +13,6 @@ export default function RssButton() {
 			<Link
 				component="button"
 				sx={{
-					mx: 1,
 					my: 1.5,
 					'--Icon-fontSize': '24px',
 					'&:hover': {

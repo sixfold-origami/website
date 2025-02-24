@@ -12,6 +12,7 @@ const cspHeader = `
 	connect-src 'self' assets.mailerlite.com;
 	img-src 'self' blob: data:;
 	font-src 'self' fonts.mailerlite.com;
+	form-action 'self' assets.mailerlite.com;
 	object-src 'none';
 	base-uri 'self';
 	form-action 'self';
