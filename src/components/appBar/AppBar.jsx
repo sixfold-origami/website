@@ -43,7 +43,7 @@ export default function AppBar() {
 					<IconLink href="https://github.com/sixfold-origami" target="_blank">
 						<GithubLogo />
 					</IconLink>
-					<IconLink href="/mailing-list">
+					<IconLink href="/newsletter">
 						<MailIcon />
 					</IconLink>
 					<RssButton />
