@@ -1,7 +1,8 @@
 import Link from '@/components/common/Link';
+import { Tooltip } from '@mui/joy';
 import * as React from 'react';
 
-export default function IconLink({ children, sx, ...props }) {
+export default function IconLink({ children, tooltip, sx, ...props }) {
 	return (
 		<Link
 			color="neutral"
@@ -14,7 +15,9 @@ export default function IconLink({ children, sx, ...props }) {
 			}}
 			{...props}
 		>
-			{children}
+			<Tooltip title={tooltip} variant="outlined" color="primary">
+				{children}
+			</Tooltip>
 		</Link>
 	);
 }

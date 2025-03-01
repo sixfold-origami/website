@@ -1,33 +1,28 @@
 'use client';
 
-import { Snackbar, Link } from '@mui/joy';
+import { Snackbar } from '@mui/joy';
 import { Rss as RssIcon } from '@phosphor-icons/react/dist/ssr';
 import { ROOT_URL } from '@/consts';
 import * as React from 'react';
+import IconLink from '@/components/common/IconLink';
 
 export default function RssButton() {
 	let [barOpen, setBarOpen] = React.useState();
 
 	return (
 		<>
-			<Link
+			<IconLink
+				href={{}}
 				component="button"
-				sx={{
-					my: 1.5,
-					'--Icon-fontSize': '24px',
-					'&:hover': {
-						'--Icon-color': 'var(--joy-palette-primary-500)',
-					},
-				}}
-				color="neutral"
-				aria-label="Copy RSS feed link"
+				sx={{ my: 1.5 }}
+				tooltip="Copy RSS feed link"
 				onClick={() => {
 					navigator.clipboard.writeText(`${ROOT_URL}/rss`);
 					setBarOpen(true);
 				}}
 			>
 				<RssIcon />
-			</Link>
+			</IconLink>
 			<Snackbar
 				open={barOpen}
 				autoHideDuration={2000}
