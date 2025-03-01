@@ -40,10 +40,14 @@ export default function AppBar() {
 					sx={{ ml: 'auto', mr: 1 }}
 					gap={2}
 				>
-					<IconLink href="https://github.com/sixfold-origami" target="_blank">
+					<IconLink
+						href="https://github.com/sixfold-origami"
+						target="_blank"
+						tooltip="GitHub"
+					>
 						<GithubLogo />
 					</IconLink>
-					<IconLink href="/newsletter">
+					<IconLink href="/newsletter" tooltip="Newsletter">
 						<MailIcon />
 					</IconLink>
 					<RssButton />

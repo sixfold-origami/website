@@ -98,6 +98,12 @@ const theme = extendTheme({
 			},
 		},
 		JoyTooltip: {
+			styleOverrides: {
+				root: ({ theme }) => ({
+					paddingLeft: theme.spacing(1.5),
+					paddingRight: theme.spacing(1.5),
+				}),
+			},
 			defaultProps: {
 				enterDelay: 200,
 			},
