@@ -8,7 +8,7 @@ published: true
 
 import Crane from '@/components/speechBubble/Crane';
 
-I recently had the pleasure of giving a talk at [RustWeek](https://rustweek.org/) on [Floating Point Hashing](https://rustweek.org/talks/rose/)[^1].
+I recently had the pleasure of giving a talk at [RustWeek](https://rustweek.org/) on [Floating Point Hashing](https://rustweek.org/talks/rose/).[^1]
 (The talk *was* recorded, but, at time of writing, the recording has yet to be posted. I'll drop a link here once it's up.)
 In it, I went into detail about all reasons why hasing a floating point value is difficult, unintuitive, highly error prone, and a bad idea all around.
 Then I did it anyway!
@@ -18,8 +18,8 @@ Then I did it anyway!
 Thanks for asking, Crane! No! It did not :)
 
 But I still had a lot of fun talking about it, and I have no issue making a slight fool of myself on stage to prove a point.
-That being said, there were a handful of things that I wanted to put in the talk, but left out, either for time, or to keep the talk flowing smoothly.
-So, please enjoy the following miscellaneous addenda.
+That being said, there were a handful of things that I wanted to put in the talk, but ultimately left out (either for time, or to keep the talk flowing smoothly).
+But, I still wanted to share them *somewhere*, so please enjoy the following miscellaneous addenda.
 
 ## Hiding in plain sight: println! and the 0.3 hootenanny
 
@@ -40,7 +40,7 @@ This is very odd, but for a non-obvious reason.
 In the talk, I explain that we see this seemingly correct behavior because we're using `f32`, not `f64`, and the classic `0.30000000000000004` error only shows up with `f64`.
 This is true, but it gloses over an odd detail: the `f32` version is still wrong, but in a more subtle way.
 
-The exact value of the `f32` version of the expression is `0.300000011920928955078125`.
+The exact value of the `f32` version of the expression is `0.300000011920928955078125`, not `0.3`.
 However, we don't see this in the console because **Rust's display impl rounds floating point numbers based on their precision.**
 In order to show the full precision, you have to write this:
 
@@ -80,7 +80,7 @@ The float inaccuracy caused by transcendental functions is bizzare, fascinating,
 Good question!
 If you're anything like me, then when you first heard this term, you were so intimidated by it that you didn't even *try* googling it to find out what it means.
 Luckily for us, it's not too complicated to wrap your head around.
-For our purposes today, a transcendental function is any function which isn't a "normal polynomial" (or a ratio of polynomials)[^3].
+For our purposes today, a transcendental function is any function which isn't a "normal polynomial" (or a ratio of polynomials).[^3]
 So, things like `sin(x)`, `ln(x)`, `e^x`, etc.
 
 Have you ever thought about how computers actually calculate these?
@@ -95,10 +95,10 @@ However, this polynomial approximation has three very important quirks:
 1. This is generally implemented in software, not in hardware
 1. The precision to which these functions are approximated to is *unspecified*
 
-This means that, if your program ever calls one of these functions, there is an unknown abount of approximation error that can be introduced, and the amount of error will actually be *platform-specific*, since different platforms will have different software implementations of the approximating series.
+This means that, if your program ever calls one of these functions, there is an unknown amount of approximation error that can be introduced, and the amount of error will actually be *platform-specific*, since different platforms will have different software implementations of the approximating series.
 Tying this back to hashing, this means that the exact value that you're trying to hash can end up varying non-trivially based on what OS[^8] the program was compiled for. 
 
-<Crane>That's neat and all, but this is *such* a specific edge case. There's no way someone would be bit by this in the real world, right?</Crane>
+<Crane>That's neat and all, but this is *such* a specific edge case. There's no way someone would hit this in the real world, right?</Crane>
 
 I'm so sorry.
 
@@ -107,7 +107,7 @@ I'm so sorry.
 This [actually happened](https://github.com/bevyengine/bevy/issues/15236).
 A user submitted an issue to [Bevy](https://bevyengine.org), an open-source game engine written in Rust, complaining that some recently added color space tests were failing on their machine, despite the tests passing in CI and passing on the machines of the original devs who did the color space work.
 As was foreshadowed, [transcendental function approximation](https://github.com/bevyengine/bevy/issues/15236#issuecomment-2351775453) was the culprit.
-The color math used the inverse tangent function (TODO: check this) in some of its calculations, and this was being evaluated slightly differently on different platforms.
+The color math used the several transcendental functions (`powi`, `powf`, `sin`, `cos`, and `cbrt`, just to name a few) in its calculations, and this was being evaluated slightly differently on different platforms.
 Then, the tests were checking color results using exact float equality, leading to test failures, but only sometimes.
 
 Bevy's eventual solution to this is fairly clever.
@@ -124,11 +124,11 @@ Good stuff!
 
 Yes, but primarily in the sense that I wouldn't write one in the first place.
 I mentioned this in the talk, but I'll say it again: I don't think the current impl is bad.
-Given the knowledge we have of the problem domain (and the testing that I did, both on my own and later in production with early adopters) I'm pretty confident that it gets correct answers, despite all of floating point's quirks.
+Given the knowledge we have of the problem domain (and the testing that I did, both on my own and later in production with early adopters), I'm pretty confident that it gets correct answers, despite all of floating point's quirks.
 The main mistake I made at the time was a lack of proper justification, not a lack of proper code.
 
 That all said though, no, I would not do this again.
-This is partially because, even now, I'm still not confident that I can cover every possible edge case, but the larger reason is that there is a better way: integer quantization[^9].
+This is partially because, even now, I'm still not confident that I can cover every possible edge case, but the larger reason is that there is a better way: integer quantization.[^9]
 
 The strategy here is pretty straighforward.
 Instead of storing the point coordinates using float values, we use integer coordinates on a regular grid:
@@ -145,23 +145,23 @@ This way, you can get nice, consistent, hashable values that also maintain enoug
 
 After all this, it would be easy to assume that I hate floating point, but I really don't.
 
-> It's not that I hate it. I love it. I love it very much. But I love it against my better judgement.
+> But when I say this, I say this all full of admiration for the jungle. It is not that I hate it, I love it. I love it very much. But I love it against my better judgment.
 > 
-> \- Werner Hertzog
+> \- Werner Herzog
 
 A key and important thing to keep in mind is that floating point was designed for working with real-world engineering data.
-Data which is collected by humans, which has error, for which the outputs can only be meaninfully used to a certain precision, etc.
+Data which is collected by humans, which has error, for which the outputs can only be meaninfully used to a certain precision, and so on.
 And, with this in mind, a lot of its design decisions actually make a lot of sense:
-- Yes, exact values and exact comparisons are basically impossible, but we can't get exact values in the first place. As long as we're within a reasonable error, we're happy.
-- Yes, values can drift as you work with them, but in almost any non-degenerate case, the drift is small enough to not matter
+- Yes, exact values and exact comparisons are basically impossible, but *measuring* exact values is impossible too. As long as we're within a reasonable error bound, we're happy.
+- Yes, values can drift as you work with them, but in almost any non-degenerate case, the drift is small enough to not matter.
 - Yes, the absolute precision drops as you move away from zero, but the *relative* precision is preserved. In most engineering contexts, you're not moving between wildly different orders of magnitude within the same computation. 
-- Yes, `NaN` has a ton of weird inconsistencies, but real measurements don't bring in `NaN`s, and having error handling encoded into the format is an interesting and not-terrible[^11] idea
+- Yes, `NaN` has a ton of weird inconsistencies, but real measurements don't bring in `NaN`s, and having error handling encoded into the format is an interesting and non-terrible[^11] idea
 
 And, after going through the excercise of the original talk, we can see this stuff in practice.
 Yes, hashing floats is a bad idea, and you **definitely should not do it**, but when you're working in a real-world engineering context, most of the quirks just kinda come out in the wash.
 
 And that really is the beauty of it.
-Looking through floating point, picking it apart, seeing its mystic face and its ugly scars, you can really *feel* the tradeoffs being made in it.
+Looking through floating point, picking it apart, seeing its mystic face and its ugly scars, you can really *feel* the tradeoffs being made.
 She's not perfect, but she's imperfect because *we're* imperfect, and I think there's something poetic in that.
 
 [^1]: You can find the slides [here](https://docs.google.com/presentation/d/1ZfmksAYp9kX-yptAMWbEb4nAe4kG8A_GabAwItmY1_0/edit?usp=sharing)
@@ -173,5 +173,5 @@ She's not perfect, but she's imperfect because *we're* imperfect, and I think th
 [^7]: As the number of polynomial terms approaches infinity, the polynomial approximation approaches the original function.
 [^8]: And, confusingly enough, it will *not* vary based on the architecture. `x86_64-apple-darwin` and `aarch64-apple-darwin` will get the same answer, but `x86_64-apple-darwin` and `x86_64-unknown-linux-gnu` will not.
 [^9]: This was originally suggested to me by my coworker, Camillo Talero, when I first gave this talk internally at work. He very politely asked why I didn't use integer quantization to solve the problem, to which I, with mild embarrassment, replied that I hadn't thought of it at the time.
-[^10]: If I were to actually do this, I would probably shift/scale the integer grid to align with the uniform voxels as well, so that we can make sure that those always line up in the end. Details details.
+[^10]: If I were to actually do this, I would probably shift/scale the integer grid to align with the uniform voxels as well, so that we can make sure that those always line up exactly in the end. Details details.
 [^11]: I don't personally like the inclusion of `NaN`, but I also don't consider myself knowledgable enough to claim that it was a bad design decision.
