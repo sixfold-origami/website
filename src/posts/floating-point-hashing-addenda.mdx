@@ -104,13 +104,17 @@ I'm so sorry.
 
 <Crane>:(</Crane>
 
-This [actually happened](todo.link.to.bevy.issue).
+This [actually happened](https://github.com/bevyengine/bevy/issues/15236).
 A user submitted an issue to [Bevy](https://bevyengine.org), an open-source game engine written in Rust, complaining that some recently added color space tests were failing on their machine, despite the tests passing in CI and passing on the machines of the original devs who did the color space work.
-As was foreshadowed, [transcendental function approximation](todo.link.to.explanation) was the culprit.
+As was foreshadowed, [transcendental function approximation](https://github.com/bevyengine/bevy/issues/15236#issuecomment-2351775453) was the culprit.
 The color math used the inverse tangent function (TODO: check this) in some of its calculations, and this was being evaluated slightly differently on different platforms.
 Then, the tests were checking color results using exact float equality, leading to test failures, but only sometimes.
 
-TODO: Maybe talk about Bevy's libm flag?
+Bevy's eventual solution to this is fairly clever.
+Inside of their [math crate](https://github.com/bevyengine/bevy/tree/release-0.16.0/crates/bevy_math), they provide [re-exports](https://github.com/bevyengine/bevy/blob/release-0.16.0/crates/bevy_math/src/ops.rs) for all the transcendental float math operations that are present in the standard library.
+Based on whether users compile with the `libm` feature, they can choose between either the `std` implementations (which vary by platform) or the `libm` implementations (which are consistent across platforms).
+They even have [a lint](https://github.com/bevyengine/bevy/blob/release-0.16.0/crates/bevy_math/clippy.toml) for it!
+Good stuff!
 
 ## "If I could turn back time" -Cher
 
