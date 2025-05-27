@@ -70,7 +70,7 @@ export default function AppBar() {
 
 const AppBarLink = ({ href, children }) => {
 	return (
-		<Link href={href} component="button" color="neutral">
+		<Link href={href} color="neutral">
 			<Typography
 				textColor="neutral.300"
 				sx={{

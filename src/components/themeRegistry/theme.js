@@ -88,6 +88,45 @@ const theme = extendTheme({
 		display: vollkorn.style.fontFamily,
 		code: sourceCodePro.style.fontFamily,
 	},
+	// Vollkorn is kinda on the small side, so make everything slightly bigger
+	// +0.025rem over the base sizes
+	fontSize: {
+		xs: '0.775rem',
+		sm: '0.9rem',
+		md: '1.025rem',
+		lg: '1.15rem',
+		xl: '1.275rem',
+		xl2: '1.525rem',
+		xl3: '1.9rem',
+		xl4: '2.275rem',
+	},
+	// +0.025 over the base line height, but just for md
+	// Surprisingly, most things actually use md, including headings
+	// Maybe we should do the others, but meh
+	lineHeight: {
+		md: '1.525',
+	},
+	// The default theme includes a -0.025em letter spacing for all headers,
+	// but it's a bit too tight for Vollkorn, so drop it to -0.015em.
+	// The body is also just slightly too tight for my eye, so we loosen it a bit.
+	// (The body loosening is unconventional, but I like it.)
+	typography: {
+		h1: {
+			letterSpacing: '-0.015em',
+		},
+		h2: {
+			letterSpacing: '-0.015em',
+		},
+		h3: {
+			letterSpacing: '-0.015em',
+		},
+		h4: {
+			letterSpacing: '-0.015em',
+		},
+		'body-md': {
+			letterSpacing: '0.0025em',
+		},
+	},
 	components: {
 		JoySheet: {
 			styleOverrides: {
