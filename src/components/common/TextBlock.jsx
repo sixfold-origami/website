@@ -1,4 +1,4 @@
-import { Sheet, Typography } from '@mui/joy';
+import { Sheet } from '@mui/joy';
 import * as React from 'react';
 
 export default async function TextBlock({ children, ...props }) {
