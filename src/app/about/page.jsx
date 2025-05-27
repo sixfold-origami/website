@@ -2,7 +2,7 @@ import Link from '@/components/common/Link';
 import { Typography } from '@mui/joy';
 import * as React from 'react';
 
-export default async function AboutMePage() {
+export default async function AboutPage() {
 	return (
 		<>
 			<Typography level="h1" sx={{ my: 2 }}>
@@ -11,7 +11,7 @@ export default async function AboutMePage() {
 
 			<Typography sx={{ mb: 2 }}>
 				Hi! I&apos;m sixfold! Also known in many places as Rose Peck. Welcome to
-				me weird little corner of the internet. Here, I mostly write{' '}
+				my weird little corner of the internet. Here, I mostly write{' '}
 				<Link href="/articles">articles</Link> about whatever interests me, but
 				I might put other work and web-related projects here as well. Here are
 				some true facts about me and this site:
@@ -28,6 +28,14 @@ export default async function AboutMePage() {
 				<li>
 					I am a{' '}
 					<Link href="/articles/tetris-why-gm">Grandmaster Tetris player</Link>
+				</li>
+				<li>
+					I also have normal hobbies, like hiking, reading fantasy/sci-fi, game
+					design,{' '}
+					<Link href="/articles/floating-point-hashing-addenda">
+						mildly cursed nonsense
+					</Link>
+					, and origami!
 				</li>
 				<li>
 					This site contains secret pages that are not linked to from anywhere.
