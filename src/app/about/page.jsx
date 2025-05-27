@@ -38,6 +38,12 @@ export default async function AboutPage() {
 					, and origami!
 				</li>
 				<li>
+					For work, I write Rust professionally at the{' '}
+					<Link href="https://www.fslabs.ca" target="_blank">
+						Foresight Spatial Labs
+					</Link>
+				</li>
+				<li>
 					This site contains secret pages that are not linked to from anywhere.
 					Have fun hunting for them!
 				</li>
