@@ -1,9 +1,6 @@
 import { AspectRatio, Box, Divider, Stack, Typography } from '@mui/joy';
 import Image from 'next/image';
-import {
-	GithubLogo,
-	EnvelopeSimple as MailIcon,
-} from '@phosphor-icons/react/dist/ssr';
+import { EnvelopeSimple as MailIcon } from '@phosphor-icons/react/dist/ssr';
 import Link from '@/components/common/Link';
 import IconLink from '@/components/common/IconLink';
 import sixfoldHeart from './6f heart.png';
@@ -40,13 +37,6 @@ export default function AppBar() {
 					sx={{ ml: 'auto', mr: 1 }}
 					gap={2}
 				>
-					<IconLink
-						href="https://github.com/sixfold-origami"
-						target="_blank"
-						tooltip="GitHub"
-					>
-						<GithubLogo />
-					</IconLink>
 					<IconLink href="/newsletter" tooltip="Newsletter">
 						<MailIcon />
 					</IconLink>
@@ -61,6 +51,7 @@ export default function AppBar() {
 			<Stack direction="row" alignItems="center" justifyContent="center">
 				<AppBarLink href="/">Home</AppBarLink>
 				<AppBarLink href="/articles">Articles</AppBarLink>
+				<AppBarLink href="/about">About</AppBarLink>
 			</Stack>
 			<Divider sx={{ mb: 0.4 }} />
 			<Divider />
