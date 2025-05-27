@@ -13,4 +13,7 @@
 	- Frog
 	- Cicada
 - Add a page for notable projects
+- Add an "about me/contact" page
 - Fix hydration error on the RED post
+- Fix text wrapping for long links
+- Maybe fix middle click/control click for navigation buttons
