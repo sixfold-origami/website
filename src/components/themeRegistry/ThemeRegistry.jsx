@@ -19,6 +19,9 @@ export default function ThemeRegistry({ children }) {
 							width: '1em',
 							height: '1em',
 						},
+						sup: {
+							lineHeight: 0,
+						},
 					}}
 				/>
 				<CssBaseline />
