@@ -21,7 +21,10 @@ export default async function AboutMePage() {
 				<li>
 					My pronouns are she/her or they/them. Choose your own adventure!
 				</li>
-				<li>All typos in articles are intentional</li>
+				<li>
+					All typos in articles are intentional. I derive great amusement from
+					spelling things incorrectly.
+				</li>
 				<li>
 					I am a{' '}
 					<Link href="/articles/tetris-why-gm">Grandmaster Tetris player</Link>
