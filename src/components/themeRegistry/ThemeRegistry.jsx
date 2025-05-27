@@ -19,6 +19,9 @@ export default function ThemeRegistry({ children }) {
 							width: '1em',
 							height: '1em',
 						},
+						code: {
+							fontFamily: 'var(--joy-fontFamily-code)',
+						},
 						sup: {
 							lineHeight: 0,
 						},
