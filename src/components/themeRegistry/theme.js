@@ -88,6 +88,23 @@ const theme = extendTheme({
 		display: vollkorn.style.fontFamily,
 		code: sourceCodePro.style.fontFamily,
 	},
+	// +0.025rem over the base sizes
+	fontSize: {
+		xs: '0.775rem',
+		sm: '0.9rem',
+		md: '1.025rem',
+		lg: '1.15rem',
+		xl: '1.275rem',
+		xl2: '1.525rem',
+		xl3: '1.9rem',
+		xl4: '2.275rem',
+	},
+	// +0.025 over the base line height, but just for md
+	// Surprisingly, most things actually use md, including headings
+	// Maybe we should do the others, but meh
+	lineHeight: {
+		md: '1.525',
+	},
 	components: {
 		JoySheet: {
 			styleOverrides: {
