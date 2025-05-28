@@ -57,7 +57,7 @@ const Header = ({ level, id, children }) => {
 			endDecorator={<HeaderLinkDecorator id={id} />}
 			sx={{ mt: 4, mb: 1 }}
 		>
-			{children}
+			<Box>{children}</Box>
 		</Typography>
 	);
 };
