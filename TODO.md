@@ -13,5 +13,4 @@
 	- Frog
 	- Cicada
 - Add a page for notable projects
-- Add an "about me/contact" page
 - Fix text wrapping for long links
