@@ -14,7 +14,7 @@ export default async function TextBlock({ alt, original, caption, ...props }) {
 					<>
 						&nbsp;&nbsp;&nbsp;
 						<Link href={original} target="_blank">
-							<Typography fontSize="sm">[original]</Typography>
+							<Typography fontSize="sm">[source]</Typography>
 						</Link>
 					</>
 				)}
