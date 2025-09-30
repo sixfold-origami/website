@@ -6,7 +6,14 @@ author: "Rose Peck"
 published: true
 ---
 
-import { theSphere, mercury, earth, pluto } from '@/assets/solarSystemLasVegas';
+import {
+	theSphere,
+	mercury,
+	starbucks,
+	venus,
+	earth,
+	pluto
+} from '@/assets/solarSystemLasVegas';
 import Crane from '@/components/speechBubble/Crane';
 import PostImage from '@/components/common/PostImage';
 
@@ -41,15 +48,67 @@ Even at this blistering speed, it's still going to be a long walk to our first d
 	src={mercury}
 	original="https://commons.wikimedia.org/wiki/File:Mercury_in_true_color.jpg"
 	alt="An image of the planet Mercury. It's gray and speckled with craters and ridges."
-	caption="Mercury, taken by MESSENGER in 2008."
-	maxWidth="50%"
+	caption="Little Mercury, running laps around the sun"
+	maxWidth="450px"
 	width={1040}
 	height={1040}
 />
 
+Walking south down the Las Vegas strip, we pass all the extravagant sights that I've heard about in movies but never actually seen.
+We pass casinos, the tiny Eiffel tower, and all the other glorious monuments to glorious overindulgence.
+After 90 minutes of walking, we reach the "Welcome to Fabulous Las Vegas" sign at the start of the strip. 
+We've traveled about 4.5 kilometers of earth space, and 40 million kiometers of solar system space.
+We still haven't reached Mercury.
+
+The strip really just... ends after the sign.
+
+After passing the sign, all the glorious sights just kinda drop away.
+To our left is the [Harry Reid International Airport](https://www.harryreidairport.com/).
+To our right is a largely unobstructed view of the Mojave.
+Is it strange that I find it prettier than the strip?[^strip]
+
+After walking for another half hour, we finally reach our destination.
+6.6 kilometers from the Sphere is a tiny parking lot with a Starbucks and a Chick-fil-a.
+
+<PostImage 
+	src={starbucks}
+	alt="An image of a Starbucks, from Google streetview"
+	caption="Beautiful, aren't they?"
+	maxWidth="md"
+	width={1920}
+	height={1080}
+/>
+
+Mercury is chilling at the Starbucks table, enjoying a coffee.
+At this scale, Mercury is only about 55 centimeters in diameter.
+That's about the width of a standard desktop computer monitor.
+You could probably fit Mercury in your refrigerator, if it were empty.
+Mercury is just about the perfect size for hugging.
+The Sun is on the scale of skyscrapers, and our little courier is small enough to hold in your hands.
+And it's so far away, that even walking at a measurable fraction of the speed of light, it still took us 2 hours to get there.
+
+The solar system is big, man.
+
 <Crane>Can we swap to a faster mode of travel before we head to Venus? This is taking forever.</Crane>
 
+Good idea.
+
 ## The Evening Star
+
+<PostImage 
+	src={venus}
+	original="https://en.wikipedia.org/wiki/File:Venus_-_December_23_2016.png"
+	alt="An image of Venus, with orange and blue clouds made visible through UV imaging."
+	caption="Our glamorous big sister!"
+	maxWidth="450px"
+	width={1040}
+	height={1040}
+/>
+
+Hopping in the car, it only takes us about 12 minutes to drive back to the Sphere at the north end of the strip.
+Our average earth speed is about 44 km/h, which puts our solar system speed at 392 million km/h, or roughly [0.36c](https://en.wikipedia.org/wiki/Speed_of_light).[^physics]
+
+After that quick jaunt, we hop on I-15 North and accelerate to 70 mph, or roughly 112 km/h.[^canadian-miles]
 
 ## Pale Blue Dot
 
@@ -58,12 +117,14 @@ Even at this blistering speed, it's still going to be a long walk to our first d
 	original="https://en.wikipedia.org/wiki/File:The_Blue_Marble,_AS17-148-22727.jpg"
 	alt={"The famous \"blue marble\" photo of Earth."}
 	caption="The only home we've ever known."
-	maxWidth="50%"
+	maxWidth="450px"
 	width={1040}
 	height={1040}
 />
 
 <Crane>It's us!</Crane>
+
+That's right, it's us ♥
 
 ## Red Planet
 
@@ -98,3 +159,6 @@ Even at this blistering speed, it's still going to be a long walk to our first d
 [^sphere]: Apparently the official name is just *Sphere*. In the original conversation, that's what my father called it, to which my brother responded: "There are a lot of spheres in the world, dad"
 [^not-recommended]: I do not recommend doing this.
 [^scale-factor]: The exact scale factor I used for my calculations was 1.12836e-7. If someone writes to me complaining about the [float precision](/articles/floating-point-hashing-addenda) of the calculator I used, I swear I *will* turn this blog around.
+[^strip]: Well, if streetview is to be believed. Maybe it's more dazzling in person.
+[^physics]: To keep the scope of this post relatively manageable, we're going to be ignoring the relativistic effects of going this fast. And also because I don't know enough physics to say what the relativistic effects would be.
+[^canadian-miles]: I'm trying to run everything in metric here, but the US interstate system is determined to ruin my blog post specifically. Also yes I know that the speed limit isn't 70 through the whole interstate, but running the numbers this way is simpler.
