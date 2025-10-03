@@ -4,6 +4,7 @@ import starbucks from './starbucks.png';
 import venus from './venus.png';
 import earth from './earth.jpg';
 import mars from './mars.png';
+import ceres from './ceres.jpg';
 import jupiter from './jupiter.png';
 import pluto from './pluto.jpg';
 
@@ -14,6 +15,7 @@ module.exports = {
 	venus,
 	earth,
 	mars,
+	ceres,
 	jupiter,
 	pluto,
 };
