@@ -3,6 +3,8 @@ import mercury from './mercury.jpg';
 import starbucks from './starbucks.png';
 import venus from './venus.png';
 import earth from './earth.jpg';
+import mars from './mars.png';
+import jupiter from './jupiter.png';
 import pluto from './pluto.jpg';
 
 module.exports = {
@@ -11,5 +13,7 @@ module.exports = {
 	starbucks,
 	venus,
 	earth,
+	mars,
+	jupiter,
 	pluto,
 };

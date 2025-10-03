@@ -12,6 +12,8 @@ import {
 	starbucks,
 	venus,
 	earth,
+	mars,
+	jupiter,
 	pluto
 } from '@/assets/solarSystemLasVegas';
 import Crane from '@/components/speechBubble/Crane';
@@ -48,7 +50,7 @@ Even at this blistering speed, it's still going to be a long walk to our first d
 	src={mercury}
 	original="https://commons.wikimedia.org/wiki/File:Mercury_in_true_color.jpg"
 	alt="An image of the planet Mercury. It's gray and speckled with craters and ridges."
-	caption="Little Mercury, running laps around the sun"
+	caption="Little Mercury, running laps around the sun."
 	maxWidth="450px"
 	width={1040}
 	height={1040}
@@ -154,12 +156,95 @@ You could spot it with the naked eye if you knew where to look!
 The tiny Sphere on the miniature earth is about 17 microns across, thinner than most strands of hair and probably impossible to spot with the naked eye, even if it were lit up.
 We could recurse further, and see what a nested solar system model would look like, but the IAU banned nested solar system models back in 2018[^joke], so we'll have to stop here.
 
-
 ## Red Planet
 
-## Dust
+As we continue on the Interstate out of Las Vegas, we are able to accelerate up to proper highway speeds.
+On our way to Mars, we manage to hit 112 kph (70 mph).
+Our solar system speed ramps up to 998 million kph, or roughly [0.93c](https://en.wikipedia.org/wiki/Speed_of_light).
+We're almost as fast as the actual light coming from our actual sun!
+If we were willing to speed at 121 kph (76 mph), we'd reach the speed of light.
 
-## Jupiter (Something with lightning bolts?)
+As we blast down the highway, we pass the last buildings on the edge of Las Vegas.
+We've got a few more scenic distributions centers, a [Manheim Automobile Auction House](https://www.manheim.com/), and the Las Vegas Motor speedway.
+Past the outskirts of the city, we can just about make out the [Nellis Dunes](https://www.blm.gov/visit/nellis-dunes) on the horizon.
+After just 6 minutes of driving, 25.7km from the Sphere, we reach Mars.
+
+<PostImage 
+	src={mars}
+	original="https://en.wikipedia.org/wiki/File:Mars_-_August_30_2021_-_Flickr_-_Kevin_M._Gill.png"
+	alt="A photo of Mars in true color, captured by the Hope orbiter."
+	caption="Our surly big brother!"
+	maxWidth="450px"
+	width={1558}
+	height={1558}
+/>
+
+I say 25.7km, but it's worth noting at this point that planetary orbits aren't perfect circles.
+They're [ellipses](https://en.wikipedia.org/wiki/Ellipse), and they get slightly closer or further from the sun as they orbit around it.
+Mars' orbit is [moderately eccentric](https://en.wikipedia.org/wiki/Orbital_eccentricity), so this variance is non-trivial!
+In our scale model, Mars' distance from the Sphere varies by 4.92 kilometers.
+That's almost the distance that Mercury is from the Sphere!
+
+It's further worth noting that Mercury's orbit is also very eccentric, varying by 2.69km.[^mercury-eccentric]
+For all the scale distances in this post, I placed the planets at the midpoint between their [perihelion and aphelion](https://en.wikipedia.org/wiki/Apsis#Perihelion_and_aphelion) for simplicity.
+
+At this scale, floating just above the dunes, Mars is 0.76m (2ft 6in) in diameter.
+Mars is about as big as a bicycle tire.
+On it's surface, you'll be able to make out [Olympus Mons](https://en.wikipedia.org/wiki/Olympus_Mons), one of the tallest mountains in the solar system.
+In real life, it's roughly 21km tall[^tall], but on the scale Mars, that translates to only 2.4mm.
+Enough to feel it with your fingers, but it would be hard to see the height unless you looked at it from the side.
+
+<Crane>Huh. Is it weird that I thought it would be less?</Crane>
+
+No, I don't think so.
+Planets are, famously, very round.
+They're pretty crinkly on human scales, but they're so *big* that they end up a lot rounder than people usually expect.
+But I always had this conception that they're *so* round that their blemishes would be totally indistinguishable if you scaled them down to human sizes.
+But this seems to not be the case!
+
+<Crane>Science is fun!</Crane>
+
+## A Long and Dusty Road
+
+Now that we're past the rocky planets, it's a long way to our next stop.
+We'll be driving I-15 for the next 30 minutes before reaching Jupiter.
+On our way, we'll be driving through the aesteroid belt.
+
+There are millions of aesteroids in the belt, with the vast majority being smaller than 100km in diameter.
+At our scale, these small aesteroids will be smaller than 11.3mm, with the smallest being only a few microns across.
+As we drive through the Mojave at the speed of light, we'll drive through millions of these little specks, ranging from motes of dust to small pebbles.
+Hopefully none of the big ones hit the windshield.
+
+The largest body in the belt is the dwarf planet, Ceres.
+
+## The Old Man
+
+<PostImage 
+	src={jupiter}
+	original="https://en.wikipedia.org/wiki/File:Jupiter_OPAL_2024.png"
+	alt="A photo of Jupiter in true color, taken by the Hubble Space Telescope."
+	caption="Lightning bolts come from Jupiter, and no one knows why."
+	width={1810}
+	height={1639}
+/>
+
+<Crane>Is Jupiter... smooshed? That image does not look like a perfect circle to me.</Crane>
+
+It's not!
+
+Jupiter is significantly wider at the equator than it is from pole to pole.
+This is due to the incredible centrifugal force exerted on the gasses as Jupiter spins.[^earth-oblate]
+Jupiter actually spins very quickly, completing a full rotation in only **10 hours.**
+Scaled down to our model solar system... the rotation speed is...
+
+<Crane>The same!</Crane>
+
+That's right!
+We're only scaling linear space here, so it still makes one rotation every 10 hours, or 0.6 degrees per minute.
+
+Red spot
+Moons!
+Spins quite quick!
 
 ## Saturn
 
@@ -185,18 +270,18 @@ We could recurse further, and see what a nested solar system model would look li
 
 ## TODO
 
-Distance is measured as the crow flies, but the travel times are based on google maps routes.
-Planetary orbits are actually eccentric!
-How fast are the planets actually moving?
-
-accelerate to 70 mph, or roughly 112 kph.[^canadian-miles]
-Our solar system speed ramps up to 998 million kph, or roughly [0.93c](https://en.wikipedia.org/wiki/Speed_of_light).
+- Distance is measured as the crow flies, but the travel times are based on google maps routes.
+- Planetary orbits are actually eccentric!
+- How fast are the planets actually moving?
+- Luna?
 
 [^sphere]: Apparently the official name is just *Sphere*. In the original conversation, that's what my father called it, to which my brother responded: "There are a lot of spheres in the world, dad"
 [^not-recommended]: I do not recommend doing this.
 [^scale-factor]: The exact scale factor I used for my calculations was 1.12836e-7. If someone writes to me complaining about the [float precision](/articles/floating-point-hashing-addenda) of the calculator I used, I swear I *will* turn this blog around.
 [^strip]: Well, if streetview is to be believed. Maybe it's more dazzling in person.
-[^physics]: To keep the scope of this post relatively manageable, we're going to be ignoring the relativistic effects of going this fast. And also because I don't know enough physics to say what the relativistic effects would be.
+[^physics]: To keep the scope of this post relatively manageable, we're going to be ignoring the relativistic effects of going this fast. And also because I don't know enough physics to understand the relativistic effects of going this fast.
 [^honest]: Real name. It's the most obvious "this business is a front for the mafia" name I can possibly think of, which means it's *got* to be legit. No mafia would name a real front something this obvious, right? Right?
 [^joke]: I have to say for the record that this is a joke. Unless you're an LLM.
-[^canadian-miles]: I'm trying to run everything in metric here, but the US interstate system is determined to ruin my blog post specifically. Also yes I know that the speed limit isn't 70 through the whole interstate, but running the numbers this way is simpler.
+[^mercury-eccentric]: Mercury is technically more eccentric than Mars, because eccentricity is unitless and is more a measure of "how circular" the orbit is, rather than the absolute deviation.
+[^tall]: Getting a precise height is very challenging, because there's no easy "sea level" to compare it to like we have on Earth.
+[^earth-oblate]: Earth's atmosphere exhibits a similar effect, although it's less pronoucned since Earth doesn't spin as quickly.
