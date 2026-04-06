@@ -13,7 +13,11 @@ export function useMDXComponents(components) {
 		h5: (props) => <Header level="title-lg" {...props} />,
 		h6: (props) => <Header level="title-md" {...props} />,
 		blockquote: BlockQuote,
-		a: ({ children, ...props }) => <Link {...props}>{children}</Link>,
+		a: ({ children, ...props }) => (
+			<Link sx={{ display: 'inline', ...props.sx }} {...props}>
+				{children}
+			</Link>
+		),
 		pre: ({ children, ...props }) => (
 			<Sheet component="pre" sx={{ overflowX: 'auto' }} {...props}>
 				{children}
