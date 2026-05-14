@@ -50,9 +50,55 @@ You have to be careful of two things with fixed point[^fixed]:
 1. When converting from large units to small units (like km to nm), then we need to be careful to not overflow our integer
 2. When converting from small units to large units, then we need to be careful about losing precision, since "integer nanometers" are much more fine-grained than "integer kilometers"
 
+<Crane>
+	Cool!
+	Good to know that we don't need to worry too much about precision now, right?
+</Crane>
+
+Well...
+
+## The Circus of GIS
+
+*Puts on clown makeup*
+
+[GIS](https://en.wikipedia.org/wiki/Geographic_information_system) stands for "geographic information system" and it is unit handling's cursed, evil older sibling that does drugs.
+These systems primarily deal with data that is spatially distributed around the globe: surveying, mapmaking, GPS, large scale construction of all forms, and more.
+
+It inherits all of the challenges that normal unit handling has, but it also has *extremely* tight precision requirements.
+Like, let's think about the limits of `f64` precision.
+`f64` usually gives you about 16 significant figures of precision, which on this scale lets you represent the surface of the earth down to nanometer precision.
+
+<Crane>
+	Surely that would be enough for anyone, right?
+</Crane>
+
+Nope!
+
+These people do want nanometer precision, which means that if you have any amount of floating point drift, you are boned!
+True nanometer precision might sound like an absurd requirement, but when your job is literally *making the GPS satillite map*, you *need* things to be that precise.
+
+<Crane>
+	Ok, so either we can't do much math, or we need to use a higher precision format, like fixed point or BigNumber?
+</Crane>
+
+Yes, but there's more. 
+
+In addition to all these precision problems there are also a great variety of [geospatial standards](https://en.wikipedia.org/wiki/Geodesy) and [coordinate reference systems](https://en.wikipedia.org/wiki/Spatial_reference_system), all of which have their own tradeoffs. Some use actual spherical coordinates, some do not, and all of them have slightly different ways of representing the earth's curvature, some of which are more accurate than others.
+
+And then you have to throw in the wrench that *the earth's surface changes over time*, and so these reference systems *also* have to change over time to maintain accuracy.
+
+<Crane>
+	Goodness, how do you even handle all of that?
+</Crane>
+
+I'll say that I am far from a GIS expert, and you probably shouldn't trust me too much on this.
+However, from what I've learned from talking with much smarter people:
+- You generally want to avoid converting between reference systems unless you absolutely have to
+- You should generally trust that your users have chosen their reference frames and standards with *intent*: they have already evalulated the tradeoffs for their use case
+- You *are* allowed to convert things, but you need to accept that that conversion is destructive
+
 ## Others...
 
-- The circus of GIS
 - Floating origin systems
 - Inverted units like density vs specific gravity
 - Supporting arcane units of measure (uom can actually handle this!)
