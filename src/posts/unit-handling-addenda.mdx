@@ -1,0 +1,62 @@
+---
+title: "When uom Isn't Enough: Addenda"
+subtitle: "Bonus content from my recent RustWeek talk about unit handling!"
+date: "2026-05-19"
+author: "Rose Peck"
+published: false
+---
+
+import Crane from '@/components/speechBubble/Crane';
+
+I recently had the pleasure of giving a talk at [RustWeek](https://rustweek.org/) on [unit handling](https://2026.rustweek.org/talks/rose/).[^slides]
+(The talk *was* recorded, but, at time of writing, the recording has yet to be posted. I'll drop a link here once it's up.)
+In it, I talked about the [uom](https://docs.rs/uom/0.38.0/uom/) crate, how awesome it is, and also all of the unit handling challenges that it can't quite solve by itself.
+
+But, at only 15 minutes, there were a lot of juicy details that I sadly had to leave out, so I'm going to talk about them here!
+I would definitely recommend watching the original talk first, but feel free to read on if you're already familiar with `uom` and unit handling in general.
+
+## Numerical Stability
+
+<Crane>
+	During the talk, you mentioned some numerical stability issues when converting units.
+	What was the deal with that?
+</Crane>
+
+That's a great question, Crane!
+
+To answer it, I'm going to ask you a trick question:
+If I have a floating point value that's storing a length in kilometers, and I convert it to be in nanometers, should I expect any significant precision loss?
+(You can assume that my values are of a "normal" magnitude, say 200km)
+
+<Crane>
+	Hm, my intuition here is no, but I can't quite justify it?
+</Crane>
+
+You would be correct!
+The justification that you are looking for is that floating point is built around **relative precision**.
+Floating point numbers give you roughly the same number of significant figures, regardless of what scale you're working in.
+(As long as you aren't working in any particularly extreme values, like [subnormals](https://en.wikipedia.org/wiki/Subnormal_number) or infinities.)
+
+As a result, most unit conversions with floating point numbers don't incur significant loss of precision, other than the inherent precision loss that you get as a result of [floating point drift](https://en.wikipedia.org/wiki/Floating-point_error_mitigation).
+
+Here's a follow up question, what about fixed point numbers?
+
+<Crane>
+	Well, fixed point numbers are basically just integers, where the difference between consecutive values are always a fixed step size. So, it depends?
+</Crane>
+
+Correct again!
+You have to be careful of two things with fixed point[^fixed]:
+1. When converting from large units to small units (like km to nm), then we need to be careful to not overflow our integer
+2. When converting from small units to large units, then we need to be careful about losing precision, since "integer nanometers" are much more fine-grained than "integer kilometers"
+
+## Others...
+
+- The circus of GIS
+- Floating origin systems
+- Inverted units like density vs specific gravity
+- Supporting arcane units of measure (uom can actually handle this!)
+- Serialization and serialization backcompat
+
+[^slides]: You can find the slides [here](https://docs.google.com/presentation/d/164pW7i25kLWAFcRvN1cDuffWomwTsdogoPaQ_ToFKmE/edit?usp=sharing)
+[^fixed]: There are probably other challenges, but I am a floating point girlie, not a fixed point girlie 💅
