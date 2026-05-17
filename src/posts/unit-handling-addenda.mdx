@@ -10,7 +10,7 @@ import Crane from '@/components/speechBubble/Crane';
 
 I recently had the pleasure of giving a talk at [RustWeek](https://rustweek.org/) on [unit handling](https://2026.rustweek.org/talks/rose/).[^slides]
 (The talk *was* recorded, but, at time of writing, the recording has yet to be posted. I'll drop a link here once it's up.)
-In it, I talked about the [uom](https://docs.rs/uom/0.38.0/uom/) crate, how awesome it is, and also all of the unit handling challenges that it can't quite solve by itself.
+In it, I talked about the [uom](https://docs.rs/uom/0.38.0/uom/) crate, how awesome it is, and also all of the unit handling challenges that it can't *quite* solve by itself.
 
 But, at only 15 minutes, there were a lot of juicy details that I sadly had to leave out, so I'm going to talk about them here!
 I would definitely recommend watching the original talk first, but feel free to read on if you're already familiar with `uom` and unit handling in general.
@@ -33,20 +33,21 @@ If I have a floating point value that's storing a length in kilometers, and I co
 </Crane>
 
 You would be correct!
-The justification that you are looking for is that floating point is built around **relative precision**.
-Floating point numbers give you roughly the same number of significant figures, regardless of what scale you're working in.
+The justification you're looking for is that floating point is built around **relative precision**.
+Floating point values give you roughly the same number of significant figures, regardless of what scale you're working in.
 (As long as you aren't working in any particularly extreme values, like [subnormals](https://en.wikipedia.org/wiki/Subnormal_number) or infinities.)
 
-As a result, most unit conversions with floating point numbers don't incur significant loss of precision, other than the inherent precision loss that you get as a result of [floating point drift](https://en.wikipedia.org/wiki/Floating-point_error_mitigation).
+As a result, most unit conversions with floating point numbers don't incur significant loss of precision!
+(Other than the inherent precision loss that you get as a result of [floating point drift](https://en.wikipedia.org/wiki/Floating-point_error_mitigation).)
 
 Here's a follow up question, what about fixed point numbers?
 
 <Crane>
-	Well, fixed point numbers are basically just integers, where the difference between consecutive values are always a fixed step size. So, it depends?
+	Well, fixed point numbers are basically just integers, where the difference between consecutive values are always a fixed step size. So... it depends?
 </Crane>
 
 Correct again!
-You have to be careful of two things with fixed point[^fixed]:
+You have to be careful of two things with fixed point:[^fixed]
 1. When converting from large units to small units (like km to nm), then we need to be careful to not overflow our integer
 2. When converting from small units to large units, then we need to be careful about losing precision, since "integer nanometers" are much more fine-grained than "integer kilometers"
 
@@ -62,19 +63,25 @@ Well...
 *Puts on clown makeup*
 
 [GIS](https://en.wikipedia.org/wiki/Geographic_information_system) stands for "geographic information system" and it is unit handling's cursed, evil older sibling that does drugs.
-These systems primarily deal with data that is spatially distributed around the globe: surveying, mapmaking, GPS, large scale construction of all forms, and more.
+I am not a GIS expert by any stretch of the imagination, but I have heard horror stories from those more experienced than myself.
 
+These systems primarily deal with data that is spatially distributed around the globe: surveying, mapmaking, GPS, large scale construction of all forms, and more.
 It inherits all of the challenges that normal unit handling has, but it also has *extremely* tight precision requirements.
-Like, let's think about the limits of `f64` precision.
+
+<Crane>
+	How extreme are we talking here?
+</Crane>
+
+Let's think about the limits of `f64` precision.
 `f64` usually gives you about 16 significant figures of precision, which on this scale lets you represent the surface of the earth down to nanometer precision.
 
 <Crane>
-	Surely that would be enough for anyone, right?
+	Surely that would be enough for anyone... right? Right?
 </Crane>
 
-Nope!
+Bad news, kid.
 
-These people do want nanometer precision, which means that if you have any amount of floating point drift, you are boned!
+These people *want* nanometer precision, which means that if you have any amount of floating point drift, you are boned!
 True nanometer precision might sound like an absurd requirement, but when your job is literally *making the GPS satillite map*, you *need* things to be that precise.
 
 <Crane>
@@ -83,19 +90,22 @@ True nanometer precision might sound like an absurd requirement, but when your j
 
 Yes, but there's more. 
 
-In addition to all these precision problems there are also a great variety of [geospatial standards](https://en.wikipedia.org/wiki/Geodesy) and [coordinate reference systems](https://en.wikipedia.org/wiki/Spatial_reference_system), all of which have their own tradeoffs. Some use actual spherical coordinates, some do not, and all of them have slightly different ways of representing the earth's curvature, some of which are more accurate than others.
+In addition to all these precision problems there are also a great variety of [geospatial standards](https://en.wikipedia.org/wiki/Geodesy) and [coordinate reference systems](https://en.wikipedia.org/wiki/Spatial_reference_system), all of which have their own tradeoffs.
+Some use cartesian coordinates, some use ellipsoid coordinates, and all of them have slightly different ways of representing the earth's curvature.
+Additionally, each system has its own tradeoffs regarding local and global accuracy.
 
-And then you have to throw in the wrench that *the earth's surface changes over time*, and so these reference systems *also* have to change over time to maintain accuracy.
+And then you have to throw in the wrench that **the earth's surface changes over time**, and so these reference systems *also* have to change over time to maintain accuracy.
 
 <Crane>
 	Goodness, how do you even handle all of that?
 </Crane>
 
-I'll say that I am far from a GIS expert, and you probably shouldn't trust me too much on this.
+Again, I am far from a GIS expert, and you probably shouldn't trust me too much on this.
 However, from what I've learned from talking with much smarter people:
 - You generally want to avoid converting between reference systems unless you absolutely have to
 - You should generally trust that your users have chosen their reference frames and standards with *intent*: they have already evalulated the tradeoffs for their use case
-- You *are* allowed to convert things, but you need to accept that that conversion is destructive
+- You *are* allowed to convert things, but you need to accept that that conversion is *destructive*
+- [geodesy](https://crates.io/crates/geodesy) is pretty cool and you should probably use it[^geodesy]
 
 ## Others...
 
@@ -106,3 +116,4 @@ However, from what I've learned from talking with much smarter people:
 
 [^slides]: You can find the slides [here](https://docs.google.com/presentation/d/164pW7i25kLWAFcRvN1cDuffWomwTsdogoPaQ_ToFKmE/edit?usp=sharing)
 [^fixed]: There are probably other challenges, but I am a floating point girlie, not a fixed point girlie 💅
+[^geodesy]: This is according to a coworker of mine who is more knowledgable on these things. She does warn, however, that it has some rough edges.
