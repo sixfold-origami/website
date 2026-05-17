@@ -107,13 +107,70 @@ However, from what I've learned from talking with much smarter people:
 - You *are* allowed to convert things, but you need to accept that that conversion is *destructive*
 - [geodesy](https://crates.io/crates/geodesy) is pretty cool and you should probably use it[^geodesy]
 
+## Serialization
+
+Serializing numbers with unit information is a fun and interesting challenge.
+
+<Crane>
+	Wait, does `uom` handle serialization?
+</Crane>
+
+It does!
+The way it handles it is actually related to how uom manages to be zero cost: **everything is just metric internally.**[^metric]
+
+I mentioned this in the talk, but `uom` always converts inputs to a consistent internal unit system on construction:
+
+```rs
+// Give it a value in inches, and uom converts it inside this constructor
+let my_length = Length::new::<inch>(2.54);
+// my_length is now internally stored in meters!
+```
+
+Internally, `Length` doesn't store any unit information; it's just an `f64`.
+The unit information only exists at compile time, and conversions are baked in.
+
+As a result, serializing a `uom` value is a simple as serializing an `f64`.
+You just... write down the number.
+Since the internal representation is always using the same unit, you can always deserialize it back as the same value.
+
+<Crane>
+	Question: what happens if the "base unit" changes between versions of the software?
+	What if an older version was using centimeters internally, and now the new version uses meters?
+</Crane>
+
+Ah... yes...
+
+This is a real problem.
+When serializing and deserializing, all our unit information is *implicit*.
+It's a side effect of the configuration of our program, not something we actually track explicitly.
+So, if we were in the situation that Crane described, then our program would implicitly assume that the file had always been in meters, and then silently deserialize the wrong value.
+
+<Crane>
+	So, what do we do?
+</Crane>
+
+The same thing we do for all our other serialization backcompat, Pinky :)
+
+This problem isn't limited to just units: it's common in CAD to have save files or project files that need to be backwards-compatible, even as various parts of the software change.
+Any CAD software worth its salt is going to have some kind of system in place already to handle backwards compatibility with older save files.
+
+Serialization backcompat is a fascinating subject!
+
+But sadly, I think this blog post is getting long enough already.
+
+<Crane>
+	Story for another time?
+</Crane>
+
+Story for another time \<3
+
 ## Others...
 
 - Floating origin systems
 - Inverted units like density vs specific gravity
 - Supporting arcane units of measure (uom can actually handle this!)
-- Serialization and serialization backcompat
 
 [^slides]: You can find the slides [here](https://docs.google.com/presentation/d/164pW7i25kLWAFcRvN1cDuffWomwTsdogoPaQ_ToFKmE/edit?usp=sharing)
 [^fixed]: There are probably other challenges, but I am a floating point girlie, not a fixed point girlie 💅
 [^geodesy]: This is according to a coworker of mine who is more knowledgable on these things. She does warn, however, that it has some rough edges.
+[^metric]: Technically, `uom` uses the "base units" of your current unit system, which may or may not be metric. But, in practice, it is almost always metric. Read more about it [here](https://docs.rs/uom/latest/uom/#design).
