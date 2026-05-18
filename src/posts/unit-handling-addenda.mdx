@@ -1,0 +1,176 @@
+---
+title: "When uom Isn't Enough: Addenda"
+subtitle: "Bonus content from my recent RustWeek talk about unit handling!"
+date: "2026-05-19"
+author: "Rose Peck"
+published: false
+---
+
+import Crane from '@/components/speechBubble/Crane';
+
+I recently had the pleasure of giving a talk at [RustWeek](https://rustweek.org/) on [unit handling](https://2026.rustweek.org/talks/rose/).[^slides]
+(The talk *was* recorded, but, at time of writing, the recording has yet to be posted. I'll drop a link here once it's up.)
+In it, I talked about the [uom](https://docs.rs/uom/0.38.0/uom/) crate, how awesome it is, and also all of the unit handling challenges that it can't *quite* solve by itself.
+
+But, at only 15 minutes, there were a lot of juicy details that I sadly had to leave out, so I'm going to talk about them here!
+I would definitely recommend watching the original talk first, but feel free to read on if you're already familiar with `uom` and unit handling in general.
+
+## Numerical Stability
+
+<Crane>
+	During the talk, you mentioned some numerical stability issues when converting units.
+	What was the deal with that?
+</Crane>
+
+That's a great question, Crane!
+
+To answer it, I'm going to ask you a trick question:
+If I have a floating point value that's storing a length in kilometers, and I convert it to be in nanometers, should I expect any significant precision loss?
+(You can assume that my values are of a "normal" magnitude, say 200km)
+
+<Crane>
+	Hm, my intuition here is no, but I can't quite justify it?
+</Crane>
+
+You would be correct!
+The justification you're looking for is that floating point is built around **relative precision**.
+Floating point values give you roughly the same number of significant figures, regardless of what scale you're working in.
+(As long as you aren't working in any particularly extreme values, like [subnormals](https://en.wikipedia.org/wiki/Subnormal_number) or infinities.)
+
+As a result, most unit conversions with floating point numbers don't incur significant loss of precision!
+(Other than the inherent precision loss that you get as a result of [floating point drift](https://en.wikipedia.org/wiki/Floating-point_error_mitigation).)
+
+Here's a follow up question, what about fixed point numbers?
+
+<Crane>
+	Well, fixed point numbers are basically just integers, where the difference between consecutive values are always a fixed step size. So... it depends?
+</Crane>
+
+Correct again!
+You have to be careful of two things with fixed point:[^fixed]
+1. When converting from large units to small units (like km to nm), then we need to be careful to not overflow our integer
+2. When converting from small units to large units, then we need to be careful about losing precision, since "integer nanometers" are much more fine-grained than "integer kilometers"
+
+<Crane>
+	Cool!
+	Good to know that we don't need to worry too much about precision now, right?
+</Crane>
+
+Well...
+
+## The Circus of GIS
+
+*Puts on clown makeup*
+
+[GIS](https://en.wikipedia.org/wiki/Geographic_information_system) stands for "geographic information system" and it is unit handling's cursed, evil older sibling that does drugs.
+I am not a GIS expert by any stretch of the imagination, but I have heard horror stories from those more experienced than myself.
+
+These systems primarily deal with data that is spatially distributed around the globe: surveying, mapmaking, GPS, large scale construction of all forms, and more.
+It inherits all of the challenges that normal unit handling has, but it also has *extremely* tight precision requirements.
+
+<Crane>
+	How extreme are we talking here?
+</Crane>
+
+Let's think about the limits of `f64` precision.
+`f64` usually gives you about 16 significant figures of precision, which on this scale lets you represent the surface of the earth down to nanometer precision.
+
+<Crane>
+	Surely that would be enough for anyone... right? Right?
+</Crane>
+
+Bad news, kid.
+
+These people *want* nanometer precision, which means that if you have any amount of floating point drift, you are boned!
+True nanometer precision might sound like an absurd requirement, but when your job is literally *making the GPS satillite map*, you *need* things to be that precise.
+
+<Crane>
+	Ok, so either we can't do much math, or we need to use a higher precision format, like fixed point or BigNumber?
+</Crane>
+
+Yes, but there's more. 
+
+In addition to all these precision problems there are also a great variety of [geospatial standards](https://en.wikipedia.org/wiki/Geodesy) and [coordinate reference systems](https://en.wikipedia.org/wiki/Spatial_reference_system), all of which have their own tradeoffs.
+Some use cartesian coordinates, some use ellipsoid coordinates, and all of them have slightly different ways of representing the earth's curvature.
+Additionally, each system has its own tradeoffs regarding local and global accuracy.
+
+And then you have to throw in the wrench that **the earth's surface changes over time**, and so these reference systems *also* have to change over time to maintain accuracy.
+
+<Crane>
+	Goodness, how do you even handle all of that?
+</Crane>
+
+Again, I am far from a GIS expert, and you probably shouldn't trust me too much on this.
+However, from what I've learned from talking with much smarter people:
+- You generally want to avoid converting between reference systems unless you absolutely have to
+- You should generally trust that your users have chosen their reference frames and standards with *intent*: they have already evalulated the tradeoffs for their use case
+- You *are* allowed to convert things, but you need to accept that that conversion is *destructive*
+- [geodesy](https://crates.io/crates/geodesy) is pretty cool and you should probably use it[^geodesy]
+
+## Cereal Eyes A Shun
+
+Serializing numbers with unit information is a fun and interesting challenge.
+
+<Crane>
+	Wait, does `uom` handle serialization?
+</Crane>
+
+It does!
+The way it handles it is actually related to how uom manages to be zero cost: **everything is just metric internally.**[^metric]
+
+I mentioned this in the talk, but `uom` always converts inputs to a consistent internal unit system on construction:
+
+```rs
+// Give it a value in inches, and uom converts it inside this constructor
+let my_length = Length::new::<inch>(2.54);
+// my_length is now internally stored in meters!
+```
+
+Internally, `Length` doesn't store any unit information; it's just an `f64`.
+The unit information only exists at compile time, and conversions are baked in.
+
+As a result, serializing a `uom` value is a simple as serializing an `f64`.
+You just... write down the number.
+Since the internal representation is always using the same unit, you can always deserialize it back as the same value.
+
+<Crane>
+	Question: what happens if the "base unit" *changes* between versions of the software?
+	What if an older version was using centimeters internally, and now the new version uses meters?
+</Crane>
+
+Ah... yes...
+
+This is a real problem.
+When serializing and deserializing, all our unit information is *implicit*.
+It's a side effect of the configuration of our program, not something we actually track explicitly.
+So, if we were in the situation that Crane described, then our program would implicitly assume that the file had always been in meters, and then silently deserialize the wrong value.
+
+<Crane>
+	So, what do we do?
+</Crane>
+
+The same thing we do for all our other serialization backcompat, Pinky :)
+
+This problem isn't limited to just units: it's common in CAD to have save files or project files that need to be backwards-compatible.
+This includes not just unit system changes, but structural changes to your object model, floating origin shifting, handling defaults for new functionality, and much more.
+Any CAD software worth its salt will *already* have some kind of system in place to handle this, and we can just handle our unit system changes by piggybacking on that existing system.
+
+<Crane>
+	Cool!
+	So... how do we actually do that then?
+</Crane>
+
+Serialization backcompat is a fascinating subject!
+
+...That I don't think I have time to talk about today 😅
+
+<Crane>
+	Story for another time?
+</Crane>
+
+Story for another time \<3
+
+[^slides]: You can find the slides [here](https://docs.google.com/presentation/d/164pW7i25kLWAFcRvN1cDuffWomwTsdogoPaQ_ToFKmE/edit?usp=sharing)
+[^fixed]: There are probably other challenges, but I am a floating point girlie, not a fixed point girlie 💅
+[^geodesy]: This is according to a coworker of mine who is more knowledgable on these things. She does warn, however, that it has some rough edges.
+[^metric]: Technically, `uom` uses the "base units" of your current unit system, which may or may not be metric. But, in practice, it is almost always metric. Read more about it [here](https://docs.rs/uom/latest/uom/#design).
