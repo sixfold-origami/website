@@ -6,7 +6,18 @@ author: "Rose Peck"
 published: false
 ---
 
+import illusionOfChoice from '@/assets/unitHandlingAddenda/illusionOfChoice.png';
 import Crane from '@/components/speechBubble/Crane';
+import PostImage from '@/components/common/PostImage';
+
+<PostImage 
+	src={illusionOfChoice}
+	alt="A meme image of a cow standing in front of two doors that lead to the same place. The first is labeled '1 mile', and the second is labeled '1.609 km'"
+	caption="As you can see, kilometers are longer than miles. You can tell because 1.609 is larger than 1."
+	width={608}
+	height={500}
+	maxWidth="500px"
+/>
 
 I recently had the pleasure of giving a talk at [RustWeek](https://rustweek.org/) on [unit handling](https://2026.rustweek.org/talks/rose/).[^slides]
 (The talk *was* recorded, but, at time of writing, the recording has yet to be posted. I'll drop a link here once it's up.)
