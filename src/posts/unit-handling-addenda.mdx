@@ -107,7 +107,7 @@ However, from what I've learned from talking with much smarter people:
 - You *are* allowed to convert things, but you need to accept that that conversion is *destructive*
 - [geodesy](https://crates.io/crates/geodesy) is pretty cool and you should probably use it[^geodesy]
 
-## Serialization
+## Cereal Eyes A Shun
 
 Serializing numbers with unit information is a fun and interesting challenge.
 
@@ -134,7 +134,7 @@ You just... write down the number.
 Since the internal representation is always using the same unit, you can always deserialize it back as the same value.
 
 <Crane>
-	Question: what happens if the "base unit" changes between versions of the software?
+	Question: what happens if the "base unit" *changes* between versions of the software?
 	What if an older version was using centimeters internally, and now the new version uses meters?
 </Crane>
 
@@ -151,12 +151,18 @@ So, if we were in the situation that Crane described, then our program would imp
 
 The same thing we do for all our other serialization backcompat, Pinky :)
 
-This problem isn't limited to just units: it's common in CAD to have save files or project files that need to be backwards-compatible, even as various parts of the software change.
-Any CAD software worth its salt is going to have some kind of system in place already to handle backwards compatibility with older save files.
+This problem isn't limited to just units: it's common in CAD to have save files or project files that need to be backwards-compatible.
+This includes not just unit system changes, but structural changes to your object model, floating origin shifting, handling defaults for new functionality, and much more.
+Any CAD software worth its salt will *already* have some kind of system in place to handle this, and we can just handle our unit system changes by piggybacking on that existing system.
+
+<Crane>
+	Cool!
+	So... how do we actually do that then?
+</Crane>
 
 Serialization backcompat is a fascinating subject!
 
-But sadly, I think this blog post is getting long enough already.
+...That I don't think I have time to talk about today 😅
 
 <Crane>
 	Story for another time?
