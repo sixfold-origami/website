@@ -22,8 +22,8 @@ export default async function AboutPage() {
 					My pronouns are she/her or they/them. Choose your own adventure!
 				</li>
 				<li>
-					All typos in articles are intentional. I derive great amusement from
-					spelling things incorrectly.
+					Contrary to popular belief,{' '}
+					<Link href="/articles/undeath">I cannot be killed</Link>
 				</li>
 				<li>
 					I am a{' '}
