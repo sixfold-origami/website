@@ -4,7 +4,7 @@ import { Box, Typography } from '@mui/joy';
 
 import Link from '@/components/common/Link';
 
-export default async function TextBlock({
+export default async function PostImage({
 	alt,
 	original,
 	caption,
