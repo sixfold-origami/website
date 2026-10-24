@@ -33,7 +33,7 @@ export default async function GameCard({
 						{...props}
 					/>
 				</Box>
-				<Box width={{ xs: '100%', sm: '65%' }}>
+				<Stack width={{ xs: '100%', sm: '65%' }} spacing={1}>
 					{positives &&
 						positives.map((positive, i) => (
 							<Typography
@@ -41,7 +41,6 @@ export default async function GameCard({
 								level="h3"
 								color="success"
 								startDecorator={<Plus style={{ marginRight: 4 }} />}
-								sx={{ mb: 1 }}
 							>
 								{positive}
 							</Typography>
@@ -57,7 +56,7 @@ export default async function GameCard({
 								{negative}
 							</Typography>
 						))}
-				</Box>
+				</Stack>
 			</Stack>
 		</Box>
 	);
