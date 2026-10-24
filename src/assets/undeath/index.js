@@ -3,5 +3,5 @@ import bonfire from './bonfire.jpeg';
 
 module.exports = {
 	boxing,
-	bonfire
+	bonfire,
 };
